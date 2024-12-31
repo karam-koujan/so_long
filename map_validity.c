@@ -6,7 +6,7 @@
 /*   By: kkoujan <kkoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 20:20:28 by kkoujan           #+#    #+#             */
-/*   Updated: 2024/12/31 21:08:33 by kkoujan          ###   ########.fr       */
+/*   Updated: 2024/12/31 21:52:32 by kkoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,37 @@ int	check_walls(char **map)
 	return (1);
 }
 
+int	check_elements(char **map)
+{
+	int		exit;
+	int		collectible;
+	int		s_pos;
+	size_t	rows;
+	size_t	cols;
+
+	exit = 0;
+	collectible = 0;
+	s_pos = 0;
+	rows = 0;
+	while (map[rows])
+	{
+		cols = 0;
+		while (cols < ft_strlen(map[rows]))
+		{
+			if (map[rows][cols] == 'E')
+				exit++;
+			if (map[rows][cols] == 'C')
+				collectible++;
+			if (map[rows][cols] == 'P')
+				s_pos++;
+			cols++;
+		}
+		rows++;
+	}
+	return (1 && !(exit != 1 || collectible == 0 || s_pos != 1));
+}
+
 int	check_map(char **map)
 {
-
-	if (!is_rectangular(map))
-		return (1);
-	if (!check_walls(map))
-		ft_printf("make walls!!");
-	return 0;
+	return (is_rectangular(map) && check_walls(map) && check_elements(map));
 }
