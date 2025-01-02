@@ -6,7 +6,7 @@
 /*   By: kkoujan <kkoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 15:34:54 by kkoujan           #+#    #+#             */
-/*   Updated: 2025/01/02 12:15:48 by kkoujan          ###   ########.fr       */
+/*   Updated: 2025/01/02 15:40:43 by kkoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	calculate_cols(char *row)
 
 	cols = ft_strlen(row);
 	if (!cols)
-		return (cols - 1);
+		return (cols);
 	if (row[cols - 1] == '\n')
 	{
 		cols--;
@@ -26,11 +26,13 @@ int	calculate_cols(char *row)
 	return (cols);
 }
 
-int	calculate_rows(int fd)
+int	calculate_rows(char	*file_path)
 {
 	char	*row_line;
 	int		rows;
+	int		fd;
 
+	fd = open(file_path, O_RDONLY, 0777);
 	row_line = get_next_line(fd);
 	rows = 0;
 	while (row_line)
@@ -40,24 +42,26 @@ int	calculate_rows(int fd)
 		row_line = get_next_line(fd);
 	}
 	free(row_line);
+	close(fd);
 	return (rows);
 }
 
-
-
-char	**read_map(char *path)
+int	check_map(char **map)
 {
-	int		fd;
+	return (is_rectangular(map) && check_walls(map) && check_elements(map) \
+				&& is_path_valid(map));
+}
+
+char	**read_map(int fd, char *file_path)
+{
 	char	**map;
 	int		i;
 	char	*row_line;
 
 	i = 0;
-	fd = open(path, O_RDONLY, 0777);
-	map = (char **)malloc((calculate_rows(fd) + 1) * sizeof(char *));
+	map = (char **)malloc((calculate_rows(file_path) + 1) * sizeof(char *));
 	if (!map)
 		return (NULL);
-	fd = open(path, O_RDONLY, 0777);
 	row_line = get_next_line(fd);
 	while (row_line)
 	{
@@ -68,6 +72,7 @@ char	**read_map(char *path)
 			return (NULL);
 		}
 		ft_strlcpy(map[i], row_line, calculate_cols(row_line) + 1);
+		ft_printf("%s",map[i]);
 		free(row_line);
 		row_line = get_next_line(fd);
 		i++;
@@ -75,13 +80,3 @@ char	**read_map(char *path)
 	map[i] = NULL;
 	return (free(row_line), map);
 }
-
-/*
- * steps :
- * - Read the map from the file.  
- * 		
- * 
- * 
- * - Check if the map is a valid one.
- * - parse the map
-*/

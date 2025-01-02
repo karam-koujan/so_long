@@ -6,7 +6,7 @@
 /*   By: kkoujan <kkoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 20:20:28 by kkoujan           #+#    #+#             */
-/*   Updated: 2025/01/02 14:07:09 by kkoujan          ###   ########.fr       */
+/*   Updated: 2025/01/02 14:44:12 by kkoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,8 @@ int	dfs(char **map, int x, int y, int rows)
 	result = 0;
 	cols = ft_strlen(map[0]);
 	collectible = 0;
-	if (x < 0 || y < 0 || x >= cols || y >= rows || map[y][x] == '1' || map[y][x] == 'V')
+	if (x < 0 || y < 0 || x >= cols || y >= rows \
+		|| map[y][x] == '1' || map[y][x] == 'V')
 	{
 		return (0);
 	}
@@ -94,8 +95,9 @@ int	dfs(char **map, int x, int y, int rows)
 	if (map[y][x] == 'C')
 		collectible++;
 	map[y][x] = 'V';
-	result = dfs(map, x + 1, y, rows) + dfs(map, x - 1, y, rows) + dfs(map, x , y + 1, rows) + dfs(map, x, y - 1, rows);
-	return (collectible + result );
+	result = dfs(map, x + 1, y, rows) + dfs(map, x - 1, y, rows) \
+					+ dfs(map, x, y + 1, rows) + dfs(map, x, y - 1, rows);
+	return (collectible + result);
 }
 
 int	is_path_valid(char **map)
@@ -106,7 +108,7 @@ int	is_path_valid(char **map)
 	int			res;
 
 	rows = count_rows(map);
-	collectible = count_components(map,'C');
+	collectible = count_components(map, 'C');
 	map_copy = copy_map(map);
 	if (!map_copy)
 		return (0);
@@ -116,8 +118,3 @@ int	is_path_valid(char **map)
 	return (res >= collectible + 1);
 }
 
-int	check_map(char **map)
-{
-	return (is_rectangular(map) && check_walls(map) && check_elements(map) \
-				 && is_path_valid(map));
-}
