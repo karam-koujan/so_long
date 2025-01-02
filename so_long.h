@@ -6,7 +6,7 @@
 /*   By: kkoujan <kkoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 15:55:26 by kkoujan           #+#    #+#             */
-/*   Updated: 2025/01/02 12:46:01 by kkoujan          ###   ########.fr       */
+/*   Updated: 2025/01/02 14:16:19 by kkoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,5 @@ char	*ft_strdup(const char *s1);
 int		count_components(char **map, char c);
 int		count_rows(char **map);
 int		*get_component_corr(char **map, char c);
+char	**read_map(char *path);
 #endif

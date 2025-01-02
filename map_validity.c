@@ -6,7 +6,7 @@
 /*   By: kkoujan <kkoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 20:20:28 by kkoujan           #+#    #+#             */
-/*   Updated: 2025/01/02 12:47:27 by kkoujan          ###   ########.fr       */
+/*   Updated: 2025/01/02 14:07:09 by kkoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,32 +60,18 @@ int	check_walls(char **map)
 
 int	check_elements(char **map)
 {
-	int		exit;
-	int		collectible;
-	int		s_pos;
-	size_t	rows;
-	size_t	cols;
+	int	exit;
+	int	collectible;
+	int	s_pos;
+	int	map_size;
 
-	exit = 0;
-	collectible = 0;
-	s_pos = 0;
-	rows = 0;
-	while (map[rows])
-	{
-		cols = 0;
-		while (cols < ft_strlen(map[rows]))
-		{
-			if (map[rows][cols] == 'E')
-				exit++;
-			if (map[rows][cols] == 'C')
-				collectible++;
-			if (map[rows][cols] == 'P')
-				s_pos++;
-			cols++;
-		}
-		rows++;
-	}
-	return (1 && !(exit != 1 || collectible == 0 || s_pos != 1));
+	exit = count_components(map, 'E');
+	collectible = count_components(map, 'C');
+	s_pos = count_components(map, 'P');
+	map_size = exit + collectible + s_pos + count_components(map, '1') \
+				+ count_components(map, '0');
+	return (1 && !(exit != 1 || collectible == 0 || s_pos != 1) \
+			&& count_rows(map) * (int)ft_strlen(map[0]) == map_size);
 }
 
 int	dfs(char **map, int x, int y, int rows)
@@ -103,7 +89,7 @@ int	dfs(char **map, int x, int y, int rows)
 	}
 	if (map[y][x] == 'E')
 	{
-		return ( 1);
+		return (1);
 	}
 	if (map[y][x] == 'C')
 		collectible++;
@@ -132,6 +118,6 @@ int	is_path_valid(char **map)
 
 int	check_map(char **map)
 {
-	return (is_rectangular(map) || check_walls(map) || check_elements(map) \
-				|| is_path_valid(map));
+	return (is_rectangular(map) && check_walls(map) && check_elements(map) \
+				 && is_path_valid(map));
 }
