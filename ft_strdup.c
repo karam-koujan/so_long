@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kkoujan <kkoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/31 16:46:50 by kkoujan           #+#    #+#             */
-/*   Updated: 2025/01/02 12:49:40 by kkoujan          ###   ########.fr       */
+/*   Created: 2024/10/24 22:04:56 by kkoujan           #+#    #+#             */
+/*   Updated: 2025/01/02 09:38:21 by kkoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	main(int ac, char **av)
+char	*ft_strdup(const char *s1)
 {
-	char	*file_path;
-	char	**map;
+	char	*s;
 
-	if (ac == 1 || ac > 2)
+	s = malloc((ft_strlen(s1) + 1) * sizeof(char));
+	if (s == NULL)
 	{
-		return (1);
+		return (NULL);
 	}
-	file_path = av[1];
-	map = read_map(file_path);
-	ft_printf("%i\n",check_map(map));
+	ft_strlcpy(s, s1, ft_strlen(s1) + 1);
+	return (s);
 }

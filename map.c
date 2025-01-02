@@ -6,7 +6,7 @@
 /*   By: kkoujan <kkoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 15:34:54 by kkoujan           #+#    #+#             */
-/*   Updated: 2024/12/31 20:28:52 by kkoujan          ###   ########.fr       */
+/*   Updated: 2025/01/02 12:15:48 by kkoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,24 +35,15 @@ int	calculate_rows(int fd)
 	rows = 0;
 	while (row_line)
 	{
+		free(row_line);
 		rows++;
 		row_line = get_next_line(fd);
-		free(row_line);
-		close(fd);
 	}
 	free(row_line);
 	return (rows);
 }
 
-void	free_arr(char **arr, int i)
-{
-	while (i >= 0)
-	{
-		free(arr[i]);
-		i--;
-	}
-	free(arr);
-}
+
 
 char	**read_map(char *path)
 {
@@ -63,7 +54,7 @@ char	**read_map(char *path)
 
 	i = 0;
 	fd = open(path, O_RDONLY, 0777);
-	map = (char **)malloc(calculate_rows(fd) * sizeof(char *));
+	map = (char **)malloc((calculate_rows(fd) + 1) * sizeof(char *));
 	if (!map)
 		return (NULL);
 	fd = open(path, O_RDONLY, 0777);
@@ -72,7 +63,10 @@ char	**read_map(char *path)
 	{
 		map[i] = (char *)malloc(calculate_cols(row_line) * sizeof(char));
 		if (!map)
-			free_arr(map, i);
+		{
+			free_arr(map, i - 1);
+			return (NULL);
+		}
 		ft_strlcpy(map[i], row_line, calculate_cols(row_line) + 1);
 		free(row_line);
 		row_line = get_next_line(fd);
