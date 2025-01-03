@@ -6,7 +6,7 @@
 /*   By: kkoujan <kkoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 15:55:26 by kkoujan           #+#    #+#             */
-/*   Updated: 2025/01/03 13:19:33 by kkoujan          ###   ########.fr       */
+/*   Updated: 2025/01/03 15:32:56 by kkoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,5 @@ int		check_walls(char **map);
 int		check_elements(char **map);
 int		dfs(char **map, int x, int y, int rows);
 int		is_path_valid(char **map);
-int		render_map(char **map, t_data mlx);
+int		map_render(char **map, t_data mlx);
 #endif
