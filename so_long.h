@@ -6,7 +6,7 @@
 /*   By: kkoujan <kkoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 15:55:26 by kkoujan           #+#    #+#             */
-/*   Updated: 2025/01/03 13:13:33 by kkoujan          ###   ########.fr       */
+/*   Updated: 2025/01/03 13:19:33 by kkoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,9 @@ typedef struct s_data
 }				t_data;
 typedef struct s_map
 {
-	int	width;
-	int	height;
+	int		width;
+	int		height;
+	char	component;
 }				t_map;
 char	**read_map(int fd, char *file_path);
 char	*get_next_line(int fd);
