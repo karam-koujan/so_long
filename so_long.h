@@ -6,7 +6,7 @@
 /*   By: kkoujan <kkoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 15:55:26 by kkoujan           #+#    #+#             */
-/*   Updated: 2025/01/02 15:41:19 by kkoujan          ###   ########.fr       */
+/*   Updated: 2025/01/03 13:13:33 by kkoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,18 @@
 # include <unistd.h>
 # include <stdlib.h>
 
+typedef struct s_data
+{
+	void	*mlx;
+	void	*win;
+	int		width;
+	int		height;
+}				t_data;
+typedef struct s_map
+{
+	int	width;
+	int	height;
+}				t_map;
 char	**read_map(int fd, char *file_path);
 char	*get_next_line(int fd);
 int		ft_printf(const char *format, ...);
@@ -37,4 +49,5 @@ int		check_walls(char **map);
 int		check_elements(char **map);
 int		dfs(char **map, int x, int y, int rows);
 int		is_path_valid(char **map);
+int		render_map(char **map, t_data mlx);
 #endif
