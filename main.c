@@ -6,12 +6,16 @@
 /*   By: kkoujan <kkoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 16:46:50 by kkoujan           #+#    #+#             */
-/*   Updated: 2025/01/02 15:39:03 by kkoujan          ###   ########.fr       */
+/*   Updated: 2025/01/03 10:53:05 by kkoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+void f()
+{
+	system("leaks so_long");
+}
 int	main(int ac, char **av)
 {
 	char	*file_path;
@@ -28,6 +32,7 @@ int	main(int ac, char **av)
 	map = read_map(fd,file_path);
 	int d = check_map(map);
 	ft_printf("%i",d);
+	free_arr(map,count_rows(map));
 	close(fd);
-
+	atexit(f);
 }
