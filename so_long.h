@@ -6,7 +6,7 @@
 /*   By: kkoujan <kkoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 15:55:26 by kkoujan           #+#    #+#             */
-/*   Updated: 2025/01/05 11:37:54 by kkoujan          ###   ########.fr       */
+/*   Updated: 2025/01/05 13:17:09 by kkoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,27 +39,40 @@ typedef struct s_vars
 	t_data	libx;
 	t_map	map_metadata;
 	char	**map;	
-	int		*player_corr;
+	struct s_player		*player;
 }				t_vars;
-char	**read_map(int fd, char *file_path);
-char	*get_next_line(int fd);
-int		ft_printf(const char *format, ...);
-size_t	ft_strlen(const char *s);
-size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
-int		calculate_rows(char	*file_path);
-int		check_map(char **map);
-char	**copy_map(char **map);
-void	free_arr(char **arr, int i);
-char	*ft_strdup(const char *s1);
-int		count_components(char **map, char c);
-int		count_rows(char **map);
-int		calculate_cols(char *row);
-int		*get_component_corr(char **map, char c);
-int		is_rectangular(char **map);
-int		check_walls(char **map);
-int		check_elements(char **map);
-int		dfs(char **map, int x, int y, int rows);
-int		is_path_valid(char **map);
-int		map_render(char **map, t_data mlx);
-int	component_render_pos(t_data mlx, void *img, t_map map_metadata);
+typedef struct s_player
+{
+	void	*player_component;
+	int		*x;
+	int		*y;
+	int		steps_count;
+	int		coins;
+}				t_player;
+char		**read_map(int fd, char *file_path);
+char		*get_next_line(int fd);
+int			ft_printf(const char *format, ...);
+size_t		ft_strlen(const char *s);
+size_t		ft_strlcpy(char *dst, const char *src, size_t dstsize);
+int			calculate_rows(char	*file_path);
+int			check_map(char **map);
+char		**copy_map(char **map);
+void		free_arr(char **arr, int i);
+char		*ft_strdup(const char *s1);
+int			count_components(char **map, char c);
+int			count_rows(char **map);
+int			calculate_cols(char *row);
+int			*get_component_corr(char **map, char c);
+int			is_rectangular(char **map);
+int			check_walls(char **map);
+int			check_elements(char **map);
+int			dfs(char **map, int x, int y, int rows);
+int			is_path_valid(char **map);
+int			map_render(char **map, t_data mlx);
+int			component_render_pos(t_data mlx, void *img, t_map map_metadata);
+t_player	*player(char	**map, t_vars *vars);
+void		player_v_move(char	**map, t_player *player, \
+int keycode, t_vars *vars);
+void		player_h_move(char	**map, t_player *player, \
+int keycode, t_vars *vars);
 #endif
