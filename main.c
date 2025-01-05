@@ -6,7 +6,7 @@
 /*   By: kkoujan <kkoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 16:46:50 by kkoujan           #+#    #+#             */
-/*   Updated: 2025/01/03 15:36:48 by kkoujan          ###   ########.fr       */
+/*   Updated: 2025/01/05 08:27:46 by kkoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ int	main(int ac, char **av)
 	char **c = copy_map(map);
 	if (check_map(map))
 	{
-		mlx.height = 100 * count_rows(map);
-		mlx.width = 100 * ft_strlen(map[0]);
+		mlx.height = 60 * count_rows(map);
+		mlx.width = 60 * ft_strlen(map[0]);
 		mlx.win = mlx_new_window(mlx.mlx, mlx.width, \
 									mlx.height, av[0]);
 		map_render(c, mlx);
