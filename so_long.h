@@ -6,7 +6,7 @@
 /*   By: kkoujan <kkoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 15:55:26 by kkoujan           #+#    #+#             */
-/*   Updated: 2025/01/05 11:11:20 by kkoujan          ###   ########.fr       */
+/*   Updated: 2025/01/05 11:37:54 by kkoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct s_vars
 	t_data	libx;
 	t_map	map_metadata;
 	char	**map;	
+	int		*player_corr;
 }				t_vars;
 char	**read_map(int fd, char *file_path);
 char	*get_next_line(int fd);
