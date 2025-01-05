@@ -6,7 +6,7 @@
 /*   By: kkoujan <kkoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 11:06:50 by kkoujan           #+#    #+#             */
-/*   Updated: 2025/01/05 08:21:28 by kkoujan          ###   ########.fr       */
+/*   Updated: 2025/01/05 08:54:37 by kkoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,30 +37,29 @@ int	component_render(char **map, t_data mlx, void *img, t_map map_metadata)
 
 int	map_render(char **map, t_data mlx)
 {
-	void	*img;
-	void	*coin;
-	void	*road;
-	void	*exit;
+	void	*component;
 	t_map	map_metadata;
 
 	map_metadata.width = 60;
 	map_metadata.height = 60;
 	map_metadata.component = '1';
-	img = mlx_xpm_file_to_image(mlx.mlx, "./textures/wall.xpm", \
+	component = mlx_xpm_file_to_image(mlx.mlx, "./textures/wall.xpm", \
 									&map_metadata.width, &map_metadata.height);
-	component_render(map, mlx, img, map_metadata);
+	component_render(map, mlx, component, map_metadata);
 	map_metadata.component = 'C';
-
-	coin =  mlx_xpm_file_to_image(mlx.mlx, "./textures/coin.xpm", \
+	component = mlx_xpm_file_to_image(mlx.mlx, "./textures/coin.xpm", \
 									&map_metadata.width, &map_metadata.height);
-	component_render(map, mlx, coin, map_metadata);
-	road =  mlx_xpm_file_to_image(mlx.mlx, "./textures/road.xpm", \
+	component_render(map, mlx, component, map_metadata);
+	component = mlx_xpm_file_to_image(mlx.mlx, "./textures/road.xpm", \
 									&map_metadata.width, &map_metadata.height);
 	map_metadata.component = '0';
-	component_render(map, mlx, road, map_metadata);
-	exit =  mlx_xpm_file_to_image(mlx.mlx, "./textures/exit.xpm", \
+	component_render(map, mlx, component, map_metadata);
+	component = mlx_xpm_file_to_image(mlx.mlx, "./textures/exit.xpm", \
 									&map_metadata.width, &map_metadata.height);
 	map_metadata.component = 'E';
-	component_render(map, mlx, exit, map_metadata);
-	return (1);
+	component_render(map, mlx, component, map_metadata);
+	map_metadata.component = 'P';
+	component = mlx_xpm_file_to_image(mlx.mlx, "./textures/character.xpm", \
+									&map_metadata.width, &map_metadata.height);
+	return (component_render(map, mlx, component, map_metadata), 1);
 }
