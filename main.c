@@ -6,7 +6,7 @@
 /*   By: kkoujan <kkoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 16:46:50 by kkoujan           #+#    #+#             */
-/*   Updated: 2025/01/05 13:34:52 by kkoujan          ###   ########.fr       */
+/*   Updated: 2025/01/05 14:05:36 by kkoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,10 @@ int	key_hook(int keycode, t_vars *vars)
 		exit(0);
 		return (0);
 	}
+	vars->map_metadata.height = 60;
+	vars->map_metadata.width = 60;
 	player_v_move(vars->map, vars->player, keycode, vars);
 	player_h_move(vars->map, vars->player, keycode, vars);
-
 	return (0);
 }
 
@@ -50,9 +51,17 @@ int	main(int ac, char **av)
 		return (1);
 	}
 	mlx.mlx = mlx_init();
+	if (!mlx.mlx)
+		return (1);
 	fd = open(av[1], O_RDONLY, 0777);
+	if (fd < 0)
+		return (1);
 	map = read_map(fd, av[1]);
+	if (!map)
+		return (1);
 	char **c_map = copy_map(map);
+	if (!c_map)
+		return (1);
 	if (check_map(map))
 	{
 		mlx.height = 60 * count_rows(map);

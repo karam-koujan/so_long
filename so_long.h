@@ -6,7 +6,7 @@
 /*   By: kkoujan <kkoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 15:55:26 by kkoujan           #+#    #+#             */
-/*   Updated: 2025/01/05 13:17:09 by kkoujan          ###   ########.fr       */
+/*   Updated: 2025/01/06 09:01:29 by kkoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ typedef struct s_map
 
 typedef struct s_vars
 {
-	t_data	libx;
-	t_map	map_metadata;
-	char	**map;	
+	t_data				libx;
+	t_map				map_metadata;
+	char				**map;	
 	struct s_player		*player;
 }				t_vars;
 typedef struct s_player
@@ -69,7 +69,8 @@ int			check_elements(char **map);
 int			dfs(char **map, int x, int y, int rows);
 int			is_path_valid(char **map);
 int			map_render(char **map, t_data mlx);
-int			component_render_pos(t_data mlx, void *img, t_map map_metadata);
+void		component_render_pos(t_data mlx, char **map, void *img, \
+t_map map_metadata);
 t_player	*player(char	**map, t_vars *vars);
 void		player_v_move(char	**map, t_player *player, \
 int keycode, t_vars *vars);

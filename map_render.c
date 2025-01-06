@@ -6,7 +6,7 @@
 /*   By: kkoujan <kkoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 11:06:50 by kkoujan           #+#    #+#             */
-/*   Updated: 2025/01/05 13:33:12 by kkoujan          ###   ########.fr       */
+/*   Updated: 2025/01/06 09:11:30 by kkoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,15 @@ int	component_render(char **map, t_data mlx, void *img, t_map map_metadata)
 	return (0);
 }
 
-int	component_render_pos(t_data mlx, void *img, t_map map_metadata)
+void	component_render_pos(t_data mlx, char **map, void *img, \
+t_map map_metadata)
 {
-	mlx_put_image_to_window(mlx.mlx, mlx.win, img, map_metadata.x * \
+	ft_printf("%c\n",map[map_metadata.y][map_metadata.x]);
+	if (map[map_metadata.y][map_metadata.x] != '1')
+	{
+		mlx_put_image_to_window(mlx.mlx, mlx.win, img, map_metadata.x * \
 					60, map_metadata.y * 60);
-	return (0);
+	}
 }
 
 int	map_render(char **map, t_data mlx)

@@ -6,7 +6,7 @@
 /*   By: kkoujan <kkoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 15:34:54 by kkoujan           #+#    #+#             */
-/*   Updated: 2025/01/02 15:40:43 by kkoujan          ###   ########.fr       */
+/*   Updated: 2025/01/05 14:02:12 by kkoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ char	**read_map(int fd, char *file_path)
 			return (NULL);
 		}
 		ft_strlcpy(map[i], row_line, calculate_cols(row_line) + 1);
-		ft_printf("%s",map[i]);
 		free(row_line);
 		row_line = get_next_line(fd);
 		i++;
