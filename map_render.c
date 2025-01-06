@@ -6,7 +6,7 @@
 /*   By: kkoujan <kkoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 11:06:50 by kkoujan           #+#    #+#             */
-/*   Updated: 2025/01/06 09:56:37 by kkoujan          ###   ########.fr       */
+/*   Updated: 2025/01/06 10:57:13 by kkoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,10 @@ int	map_render(char **map, t_data mlx)
 	component_render(map, mlx, component, map_metadata);
 	map_metadata.component = 'P';
 	component = mlx_xpm_file_to_image(mlx.mlx, "./textures/character.xpm", \
+									&map_metadata.width, &map_metadata.height);
+	component_render(map, mlx, component, map_metadata);
+	map_metadata.component = 'N';
+	component = mlx_xpm_file_to_image(mlx.mlx, "./textures/enemy.xpm", \
 									&map_metadata.width, &map_metadata.height);
 	return (component_render(map, mlx, component, map_metadata), 1);
 }
