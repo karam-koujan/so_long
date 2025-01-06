@@ -6,7 +6,7 @@
 /*   By: kkoujan <kkoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 16:46:50 by kkoujan           #+#    #+#             */
-/*   Updated: 2025/01/05 14:05:36 by kkoujan          ###   ########.fr       */
+/*   Updated: 2025/01/06 10:37:26 by kkoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,19 @@ int	key_hook(int keycode, t_vars *vars)
 	}
 	vars->map_metadata.height = 60;
 	vars->map_metadata.width = 60;
-	player_v_move(vars->map, vars->player, keycode, vars);
-	player_h_move(vars->map, vars->player, keycode, vars);
+	ft_printf("player coins : %i\n",vars->player->coins);
+	if (keycode == 13 || keycode == 0)
+	{
+		vars->player->steps_count++;
+		ft_printf("%i\n", vars->player->steps_count);
+		player_v_move(vars->map, vars->player, keycode, vars);
+	}
+	if (keycode == 1 || keycode == 2)
+	{
+		vars->player->steps_count++;
+		ft_printf("%i\n", vars->player->steps_count);
+		player_h_move(vars->map, vars->player, keycode, vars);
+	}
 	return (0);
 }
 
@@ -70,6 +81,14 @@ int	main(int ac, char **av)
 									mlx.height, av[0]);
 		map_render(c_map, mlx);
 	}
+	else
+	{
+		ft_printf("Error\nThe map you gave is invalid\n");
+		free_arr(map, count_rows(map));
+		free_arr(c_map, count_rows(c_map));
+		atexit(f);
+		exit(1);
+	}
 	vars.libx = mlx;
 	vars.map = c_map;
 	vars.player = player(c_map, &vars);
@@ -77,5 +96,6 @@ int	main(int ac, char **av)
 	mlx_key_hook(mlx.win, key_hook, &vars);
 	mlx_hook(mlx.win, 17, 0, close_window, &vars);
 	mlx_loop(mlx.mlx);
+	free(vars.player);
 	close(fd);
 }
