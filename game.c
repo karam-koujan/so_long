@@ -6,7 +6,7 @@
 /*   By: kkoujan <kkoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 12:43:15 by kkoujan           #+#    #+#             */
-/*   Updated: 2025/01/06 11:10:18 by kkoujan          ###   ########.fr       */
+/*   Updated: 2025/01/07 09:18:47 by kkoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,15 @@ t_player	*player(char	**map, t_vars *vars)
 	void		*component;
 	int			*corr;
 
-	component = mlx_xpm_file_to_image(vars->libx.mlx, "./textures/character.xpm", &vars->map_metadata.width, &vars->map_metadata.height);
+	component = mlx_xpm_file_to_image(vars->libx.mlx, "./textures/character.xpm", \
+	&vars->map_metadata.width, &vars->map_metadata.height);
 	player = (t_player *)malloc(sizeof(t_player));
 	if (!player)
 		return (NULL);
 	corr = get_component_corr(map, 'P');
 	player->player_component = component;
+	player->player_c_flip = mlx_xpm_file_to_image(vars->libx.mlx, "./textures/characterflip.xpm", \
+	&vars->map_metadata.width, &vars->map_metadata.height);
 	player->x = corr;
 	player->y = corr + 1;
 	player->steps_count = 0;
@@ -134,7 +137,7 @@ void	player_h_move(char	**map, t_player *player, int keycode, t_vars *vars)
 			component_render_pos(vars->libx, map, bg, vars->map_metadata);
 			player->coins--;	
 		}
-		component_render_pos(vars->libx, map, player->player_component, \
+		component_render_pos(vars->libx, map, player->player_c_flip, \
 		vars->map_metadata);
 		vars->map_metadata.x++;
 		component_render_pos(vars->libx, map, bg, vars->map_metadata);

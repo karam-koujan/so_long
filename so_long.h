@@ -6,7 +6,7 @@
 /*   By: kkoujan <kkoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 15:55:26 by kkoujan           #+#    #+#             */
-/*   Updated: 2025/01/06 09:01:29 by kkoujan          ###   ########.fr       */
+/*   Updated: 2025/01/07 10:40:06 by kkoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct s_vars
 typedef struct s_player
 {
 	void	*player_component;
+	void	*player_c_flip;
 	int		*x;
 	int		*y;
 	int		steps_count;
@@ -76,4 +77,6 @@ void		player_v_move(char	**map, t_player *player, \
 int keycode, t_vars *vars);
 void		player_h_move(char	**map, t_player *player, \
 int keycode, t_vars *vars);
+void		movement_count(int count, t_vars *vars);
+char		*ft_itoa(int n);
 #endif

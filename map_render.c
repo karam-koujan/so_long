@@ -6,7 +6,7 @@
 /*   By: kkoujan <kkoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 11:06:50 by kkoujan           #+#    #+#             */
-/*   Updated: 2025/01/06 10:57:13 by kkoujan          ###   ########.fr       */
+/*   Updated: 2025/01/07 10:59:37 by kkoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,4 +81,42 @@ int	map_render(char **map, t_data mlx)
 	component = mlx_xpm_file_to_image(mlx.mlx, "./textures/enemy.xpm", \
 									&map_metadata.width, &map_metadata.height);
 	return (component_render(map, mlx, component, map_metadata), 1);
+}
+
+
+void	init_numbers(char	**numbers)
+{
+	numbers[0] = "./textures/0.xpm";
+	numbers[1] = "./textures/1.xpm";
+	numbers[2] = "./textures/2.xpm";
+	numbers[3] = "./textures/3.xpm";
+	numbers[4] = "./textures/4.xpm";
+	numbers[5] = "./textures/5.xpm";
+	numbers[6] = "./textures/6.xpm";
+	numbers[7] = "./textures/7.xpm";
+	numbers[8] = "./textures/8.xpm";
+	numbers[9] = "./textures/9.xpm";
+}
+
+void	movement_count(int count, t_vars *vars)
+{
+	char		*numbers[10];
+	void		*img;
+	int			size;
+	char		*num;
+	int			i;
+
+	size = 60;
+	i = 0;
+	init_numbers(numbers);
+	num = ft_itoa(count);
+	while (num[i])
+	{
+		img = mlx_xpm_file_to_image(vars->libx.mlx, numbers[num[i] - '0'], \
+		&size, &size);
+		mlx_put_image_to_window(vars->libx.mlx, vars->libx.win, img, i * \
+					size, 0 * size);
+		i++;
+	}
+	free(num);
 }

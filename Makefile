@@ -3,7 +3,7 @@ Name = so_long
 OBJ = main.o ft_printf.o ft_putunbr_base.o ft_putaddress.o \
 	  ft_strlen.o ft_putnbr.o ft_putchar.o ft_putstr.o ft_strchr.o \
 	  get_next_line.o get_next_line_utils.o map.o map_validity.o map_utils.o map_render.o \
-	  game.o
+	  game.o ft_itoa.o
 
 TEST = test.o ft_printf.o ft_putunbr_base.o ft_putaddress.o \
 	  ft_strlen.o ft_putnbr.o ft_putchar.o ft_putstr.o ft_strchr.o \
