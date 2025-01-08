@@ -6,7 +6,7 @@
 /*   By: kkoujan <kkoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 11:06:50 by kkoujan           #+#    #+#             */
-/*   Updated: 2025/01/08 09:34:55 by kkoujan          ###   ########.fr       */
+/*   Updated: 2025/01/08 11:18:47 by kkoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	component_render(char **map, t_data mlx, void *img, t_map map_metadata)
 			if (map[rows][cols] == map_metadata.component)
 			{
 				mlx_put_image_to_window(mlx.mlx, mlx.win, bg, cols * \
-				map_metadata.width, rows * map_metadata.height);				
+						map_metadata.width, rows * map_metadata.height);
 				mlx_put_image_to_window(mlx.mlx, mlx.win, img, cols * \
 						map_metadata.width, rows * map_metadata.height);
 			}
@@ -50,52 +50,27 @@ t_map map_metadata)
 	}
 }
 
-int	map_render(char **map, t_data mlx)
+void	component_create(char **map, t_data mlx, char elm, char *file_path)
 {
 	void	*component;
 	t_map	map_metadata;
 
 	map_metadata.width = 60;
 	map_metadata.height = 60;
-	map_metadata.component = '1';
-	component = mlx_xpm_file_to_image(mlx.mlx, "./textures/wall.xpm", \
+	map_metadata.component = elm;
+	component = mlx_xpm_file_to_image(mlx.mlx, file_path, \
 									&map_metadata.width, &map_metadata.height);
 	component_render(map, mlx, component, map_metadata);
-	map_metadata.component = 'C';
-	component = mlx_xpm_file_to_image(mlx.mlx, "./textures/coin.xpm", \
-									&map_metadata.width, &map_metadata.height);
-	component_render(map, mlx, component, map_metadata);
-	component = mlx_xpm_file_to_image(mlx.mlx, "./textures/road.xpm", \
-									&map_metadata.width, &map_metadata.height);
-	map_metadata.component = '0';
-	component_render(map, mlx, component, map_metadata);
-	component = mlx_xpm_file_to_image(mlx.mlx, "./textures/exit.xpm", \
-									&map_metadata.width, &map_metadata.height);
-	map_metadata.component = 'E';
-	component_render(map, mlx, component, map_metadata);
-	map_metadata.component = 'P';
-	component = mlx_xpm_file_to_image(mlx.mlx, "./textures/character.xpm", \
-									&map_metadata.width, &map_metadata.height);
-	component_render(map, mlx, component, map_metadata);
-	map_metadata.component = 'N';
-	component = mlx_xpm_file_to_image(mlx.mlx, "./textures/enemy.xpm", \
-									&map_metadata.width, &map_metadata.height);
-	return (component_render(map, mlx, component, map_metadata), 1);
 }
 
-
-void	init_numbers(char	**numbers)
+void	map_render(char **map, t_data mlx)
 {
-	numbers[0] = "./textures/0.xpm";
-	numbers[1] = "./textures/1.xpm";
-	numbers[2] = "./textures/2.xpm";
-	numbers[3] = "./textures/3.xpm";
-	numbers[4] = "./textures/4.xpm";
-	numbers[5] = "./textures/5.xpm";
-	numbers[6] = "./textures/6.xpm";
-	numbers[7] = "./textures/7.xpm";
-	numbers[8] = "./textures/8.xpm";
-	numbers[9] = "./textures/9.xpm";
+	component_create(map, mlx, '1', "./textures/wall.xpm");
+	component_create(map, mlx, 'C', "./textures/coin.xpm");
+	component_create(map, mlx, '0', "./textures/road.xpm");
+	component_create(map, mlx, 'E', "./textures/exit.xpm");
+	component_create(map, mlx, 'P', "./textures/character.xpm");
+	component_create(map, mlx, 'N', "./textures/enemy.xpm");
 }
 
 void	movement_count(int count, t_vars *vars)
@@ -117,7 +92,7 @@ void	movement_count(int count, t_vars *vars)
 		mlx_put_image_to_window(vars->libx.mlx, vars->libx.win, img, i * \
 					size, 0 * size);
 		i++;
-		mlx_destroy_image(vars->libx.mlx,img);
+		mlx_destroy_image(vars->libx.mlx, img);
 	}
 	free(num);
 }

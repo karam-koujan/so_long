@@ -6,12 +6,11 @@
 /*   By: kkoujan <kkoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 12:25:27 by kkoujan           #+#    #+#             */
-/*   Updated: 2024/12/31 16:55:31 by kkoujan          ###   ########.fr       */
+/*   Updated: 2025/01/08 11:53:53 by kkoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
