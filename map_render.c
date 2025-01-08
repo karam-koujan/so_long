@@ -6,7 +6,7 @@
 /*   By: kkoujan <kkoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 11:06:50 by kkoujan           #+#    #+#             */
-/*   Updated: 2025/01/07 10:59:37 by kkoujan          ###   ########.fr       */
+/*   Updated: 2025/01/08 09:34:55 by kkoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,7 @@ void	movement_count(int count, t_vars *vars)
 		mlx_put_image_to_window(vars->libx.mlx, vars->libx.win, img, i * \
 					size, 0 * size);
 		i++;
+		mlx_destroy_image(vars->libx.mlx,img);
 	}
 	free(num);
 }

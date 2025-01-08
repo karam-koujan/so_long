@@ -6,7 +6,7 @@
 /*   By: kkoujan <kkoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 15:34:54 by kkoujan           #+#    #+#             */
-/*   Updated: 2025/01/05 14:02:12 by kkoujan          ###   ########.fr       */
+/*   Updated: 2025/01/08 10:03:12 by kkoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ char	**read_map(int fd, char *file_path)
 	row_line = get_next_line(fd);
 	while (row_line)
 	{
-		map[i] = (char *)malloc(calculate_cols(row_line) * sizeof(char));
+		map[i] = (char *)malloc((calculate_cols(row_line) + 1) * sizeof(char));
 		if (!map)
 		{
 			free_arr(map, i - 1);

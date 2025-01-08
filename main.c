@@ -6,7 +6,7 @@
 /*   By: kkoujan <kkoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 16:46:50 by kkoujan           #+#    #+#             */
-/*   Updated: 2025/01/07 11:03:47 by kkoujan          ###   ########.fr       */
+/*   Updated: 2025/01/08 10:08:13 by kkoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int	key_hook(int keycode, t_vars *vars)
 {
 	if (keycode == 53)
 	{
-		f();
 		exit(0);
 		return (0);
 	}
@@ -46,7 +45,6 @@ int	key_hook(int keycode, t_vars *vars)
 
 int	close_window(void)
 {
-	f();
 	exit(0);
 	return (0);
 }
@@ -99,5 +97,6 @@ int	main(int ac, char **av)
 	mlx_hook(mlx.win, 17, 0, close_window, &vars);
 	mlx_loop(mlx.mlx);
 	free(vars.player);
+	free(mlx.mlx);
 	close(fd);
 }
