@@ -6,7 +6,7 @@
 /*   By: kkoujan <kkoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 16:46:50 by kkoujan           #+#    #+#             */
-/*   Updated: 2025/01/09 13:10:45 by kkoujan          ###   ########.fr       */
+/*   Updated: 2025/01/09 14:15:38 by kkoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,11 +74,6 @@ void	hooks(t_vars *vars)
 	mlx_hook(vars->libx.win, 17, 0, close_window, vars);
 }
 
-void f()
-{
-	system("leaks so_long");
-}
-
 int	main(int ac, char **av)
 {
 	char	**map;
@@ -92,10 +87,7 @@ int	main(int ac, char **av)
 		return (1);
 	map = map_create(av[1]);
 	if (!check_map(map) && ft_printf("Error\nThe map you gave is invalid\n"))
-	{
-		free_arr(map, count_rows(map));
 		exit(1);
-	}
 	mlx.height = 60 * count_rows(map);
 	mlx.width = 60 * ft_strlen(map[0]);
 	mlx.win = mlx_new_window(mlx.mlx, mlx.width, mlx.height, av[0]);

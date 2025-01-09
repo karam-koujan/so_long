@@ -6,7 +6,7 @@
 /*   By: kkoujan <kkoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 11:06:50 by kkoujan           #+#    #+#             */
-/*   Updated: 2025/01/09 14:06:04 by kkoujan          ###   ########.fr       */
+/*   Updated: 2025/01/09 14:13:22 by kkoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ int	component_render(char **map, t_data mlx, void *img, t_map map_d)
 {
 	int		rows;
 	int		cols;
-
 
 	rows = 0;
 	while (map[rows] != NULL)
