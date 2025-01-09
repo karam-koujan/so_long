@@ -6,7 +6,7 @@
 /*   By: kkoujan <kkoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 11:06:50 by kkoujan           #+#    #+#             */
-/*   Updated: 2025/01/09 12:44:17 by kkoujan          ###   ########.fr       */
+/*   Updated: 2025/01/09 12:53:59 by kkoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@ int	component_render(char **map, t_data mlx, void *img, t_map map_d)
 		cols = 0;
 		while (map[rows][cols])
 		{
+			if (map_d.component == '0' && map[rows][cols] != '0' && \
+			map[rows][cols] != '1')
+				mlx_put_image_to_window(mlx.mlx, mlx.win, img, cols * \
+						map_d.width, rows * map_d.height);
 			if (map[rows][cols] == map_d.component)
 			{
 				mlx_put_image_to_window(mlx.mlx, mlx.win, img, cols * \
@@ -66,12 +70,12 @@ void	map_render(char **map, t_vars *vars)
 	char	*abs;
 
 	abs = vars->abs;
+	component_create(map, vars->libx, '0', ft_strjoin(abs, \
+	"textures/road.xpm"));
 	component_create(map, vars->libx, '1', ft_strjoin(abs, \
 	"textures/wall.xpm"));
 	component_create(map, vars->libx, 'C', ft_strjoin(abs, \
 	"textures/coin.xpm"));
-	component_create(map, vars->libx, '0', ft_strjoin(abs, \
-	"textures/road.xpm"));
 	component_create(map, vars->libx, 'E', ft_strjoin(abs, \
 	"textures/exit.xpm"));
 	component_create(map, vars->libx, 'P', ft_strjoin(abs, \

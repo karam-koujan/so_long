@@ -6,7 +6,7 @@
 /*   By: kkoujan <kkoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 11:04:25 by kkoujan           #+#    #+#             */
-/*   Updated: 2025/01/09 12:11:30 by kkoujan          ###   ########.fr       */
+/*   Updated: 2025/01/09 12:57:43 by kkoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ int	check_path(char *path)
 	if (arr_len(path_arr) < 2)
 		return (0);
 	format = path_arr[arr_len(path_arr) - 1];
-	ft_printf("%s\n",format);
 	if (ft_strncmp(format, "ber", 3) != 0)
 		return (0);
 	free_arr(path_arr, arr_len(path_arr) - 1);

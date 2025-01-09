@@ -6,7 +6,7 @@
 /*   By: kkoujan <kkoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 16:46:50 by kkoujan           #+#    #+#             */
-/*   Updated: 2025/01/09 12:10:30 by kkoujan          ###   ########.fr       */
+/*   Updated: 2025/01/09 12:55:26 by kkoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ char	**map_create(char *file_path)
 		exit(1);
 		return (NULL);
 	}
-	ft_printf("fd: %i\n",fd);
 	map = read_map(fd, file_path);
 	if (!map)
 	{
