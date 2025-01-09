@@ -6,7 +6,7 @@
 /*   By: kkoujan <kkoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 11:06:50 by kkoujan           #+#    #+#             */
-/*   Updated: 2025/01/09 13:09:22 by kkoujan          ###   ########.fr       */
+/*   Updated: 2025/01/09 14:06:04 by kkoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,11 @@ void	map_render(char **map, t_vars *vars)
 	char	*abs;
 
 	abs = vars->abs;
+	if (vars->libx.width > 5120 || vars->libx.height > 1440)
+	{
+		ft_printf("Error\nmap is to long to fit the monitor\n");
+		exit(1);
+	}
 	component_create(map, vars->libx, '0', ft_strjoin(abs, \
 	"textures/road.xpm"));
 	component_create(map, vars->libx, '1', ft_strjoin(abs, \
