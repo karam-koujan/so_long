@@ -6,7 +6,7 @@
 /*   By: kkoujan <kkoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 16:46:50 by kkoujan           #+#    #+#             */
-/*   Updated: 2025/01/08 10:57:27 by kkoujan          ###   ########.fr       */
+/*   Updated: 2025/01/09 12:10:30 by kkoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,24 @@ char	**map_create(char *file_path)
 {
 	char	**map;
 	int		fd;
+	int		is_path_valid;
 
 	fd = open(file_path, O_RDONLY, 0777);
-	if (fd < 0)
+	is_path_valid = check_path(file_path);
+	if (!is_path_valid || fd < 0)
+	{
+		ft_printf("Error\ninvalid path\n");
+		exit(1);
 		return (NULL);
+	}
+	ft_printf("fd: %i\n",fd);
 	map = read_map(fd, file_path);
 	if (!map)
+	{
+		ft_printf("Error\ninvalid path\n");
+		exit(1);
 		return (NULL);
+	}
 	return (map);
 }
 
@@ -84,9 +95,10 @@ int	main(int ac, char **av)
 	mlx.height = 60 * count_rows(map);
 	mlx.width = 60 * ft_strlen(map[0]);
 	mlx.win = mlx_new_window(mlx.mlx, mlx.width, mlx.height, av[0]);
-	map_render(map, mlx);
 	vars.libx = mlx;
 	vars.map = map;
+	vars.abs = absolute_path(av[0]);
+	map_render(map, &vars);
 	vars.player = player(map, &vars);
 	movement_count(vars.player->steps_count, &vars);
 	hooks(&vars);

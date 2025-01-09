@@ -6,7 +6,7 @@
 /*   By: kkoujan <kkoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 15:55:26 by kkoujan           #+#    #+#             */
-/*   Updated: 2025/01/08 11:42:41 by kkoujan          ###   ########.fr       */
+/*   Updated: 2025/01/09 12:28:35 by kkoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_map
 	int		width;
 	int		height;
 	char	component;
+	char	*abs;
 	int		x;
 	int		y;
 }				t_map;
@@ -40,6 +41,7 @@ typedef struct s_vars
 	t_map				map_metadata;
 	char				**map;	
 	struct s_player		*player;
+	char				*abs;
 }				t_vars;
 typedef struct s_player
 {
@@ -69,7 +71,7 @@ int			check_walls(char **map);
 int			check_elements(char **map);
 int			dfs(char **map, int x, int y, int rows);
 int			is_path_valid(char **map);
-void		map_render(char **map, t_data mlx);
+void		map_render(char **map, t_vars *vars);
 void		component_render_pos(t_data mlx, char **map, void *img, \
 t_map map_metadata);
 t_player	*player(char	**map, t_vars *vars);
@@ -79,9 +81,15 @@ void		player_h_move(char	**map, t_player *player, \
 int keycode, t_vars *vars);
 void		movement_count(int count, t_vars *vars);
 char		*ft_itoa(int n);
-void		init_numbers(char	**numbers);
+void		init_numbers(char	**numbers, t_vars *vars);
 void		move_up(char **map, void *bg, t_player *player, t_vars *vars);
 void		move_down(char **map, void *bg, t_player *player, t_vars *vars);
 void		move_left(char **map, void *bg, t_player *player, t_vars *vars);
 void		move_right(char **map, void *bg, t_player *player, t_vars *vars);
+char		**ft_split(char const *s, char c);
+int			check_path(char *path);
+int			ft_strncmp(const char *s1, const char *s2, size_t n);
+char		*ft_substr(char const *s, unsigned int start, size_t len);
+char		*absolute_path(char *path);
+char		*ft_strjoin(char const *s1, char const *s2);
 #endif

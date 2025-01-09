@@ -6,38 +6,34 @@
 /*   By: kkoujan <kkoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 11:06:50 by kkoujan           #+#    #+#             */
-/*   Updated: 2025/01/08 11:18:47 by kkoujan          ###   ########.fr       */
+/*   Updated: 2025/01/09 12:44:17 by kkoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	component_render(char **map, t_data mlx, void *img, t_map map_metadata)
+int	component_render(char **map, t_data mlx, void *img, t_map map_d)
 {
 	int		rows;
 	int		cols;
-	void	*bg;
+
 
 	rows = 0;
-	bg = mlx_xpm_file_to_image(mlx.mlx, "./textures/road.xpm", \
-									&map_metadata.width, &map_metadata.height);
 	while (map[rows] != NULL)
 	{
 		cols = 0;
 		while (map[rows][cols])
 		{
-			if (map[rows][cols] == map_metadata.component)
+			if (map[rows][cols] == map_d.component)
 			{
-				mlx_put_image_to_window(mlx.mlx, mlx.win, bg, cols * \
-						map_metadata.width, rows * map_metadata.height);
 				mlx_put_image_to_window(mlx.mlx, mlx.win, img, cols * \
-						map_metadata.width, rows * map_metadata.height);
+						map_d.width, rows * map_d.height);
 			}
 			cols++;
 		}
 		rows++;
 	}
-	return (mlx_destroy_image(mlx.mlx, img), mlx_destroy_image(mlx.mlx, bg), 0);
+	return (mlx_destroy_image(mlx.mlx, img), 0);
 }
 
 void	component_render_pos(t_data mlx, char **map, void *img, \
@@ -58,19 +54,30 @@ void	component_create(char **map, t_data mlx, char elm, char *file_path)
 	map_metadata.width = 60;
 	map_metadata.height = 60;
 	map_metadata.component = elm;
+	map_metadata.abs = file_path;
 	component = mlx_xpm_file_to_image(mlx.mlx, file_path, \
 									&map_metadata.width, &map_metadata.height);
 	component_render(map, mlx, component, map_metadata);
+	free(file_path);
 }
 
-void	map_render(char **map, t_data mlx)
+void	map_render(char **map, t_vars *vars)
 {
-	component_create(map, mlx, '1', "./textures/wall.xpm");
-	component_create(map, mlx, 'C', "./textures/coin.xpm");
-	component_create(map, mlx, '0', "./textures/road.xpm");
-	component_create(map, mlx, 'E', "./textures/exit.xpm");
-	component_create(map, mlx, 'P', "./textures/character.xpm");
-	component_create(map, mlx, 'N', "./textures/enemy.xpm");
+	char	*abs;
+
+	abs = vars->abs;
+	component_create(map, vars->libx, '1', ft_strjoin(abs, \
+	"textures/wall.xpm"));
+	component_create(map, vars->libx, 'C', ft_strjoin(abs, \
+	"textures/coin.xpm"));
+	component_create(map, vars->libx, '0', ft_strjoin(abs, \
+	"textures/road.xpm"));
+	component_create(map, vars->libx, 'E', ft_strjoin(abs, \
+	"textures/exit.xpm"));
+	component_create(map, vars->libx, 'P', ft_strjoin(abs, \
+	"textures/character.xpm"));
+	component_create(map, vars->libx, 'N', ft_strjoin(abs, \
+	"textures/enemy.xpm"));
 }
 
 void	movement_count(int count, t_vars *vars)
@@ -83,7 +90,7 @@ void	movement_count(int count, t_vars *vars)
 
 	size = 60;
 	i = 0;
-	init_numbers(numbers);
+	init_numbers(numbers, vars);
 	num = ft_itoa(count);
 	while (num[i])
 	{
