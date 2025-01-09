@@ -12,10 +12,10 @@ TEST = test.o ft_printf.o ft_putunbr_base.o ft_putaddress.o \
 all: $(Name)
 
 $(Name): $(OBJ)
-	$(CC) -g -l mlx -L . -framework OpenGL -framework Appkit $(OBJ) -o $(Name)
+	$(CC) -l mlx -L . -framework OpenGL -framework Appkit $(OBJ) -o $(Name)
 
 %.o: %.c so_long.h ft_printf.h get_next_line.h
-	$(CC)  -g -Wall  -Wextra -Werror -Imlx -c $< -o $@
+	$(CC)  -Wall  -Wextra -Werror -Imlx -c $< -o $@
 
 test:  $(TEST) so_long.h ft_printf.h get_next_line.h
 	$(CC)  $(TEST) -o test 
