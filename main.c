@@ -6,7 +6,7 @@
 /*   By: kkoujan <kkoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 16:46:50 by kkoujan           #+#    #+#             */
-/*   Updated: 2025/01/09 12:55:26 by kkoujan          ###   ########.fr       */
+/*   Updated: 2025/01/09 13:10:45 by kkoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,11 @@ void	hooks(t_vars *vars)
 {
 	mlx_key_hook(vars->libx.win, key_hook, vars);
 	mlx_hook(vars->libx.win, 17, 0, close_window, vars);
+}
+
+void f()
+{
+	system("leaks so_long");
 }
 
 int	main(int ac, char **av)
