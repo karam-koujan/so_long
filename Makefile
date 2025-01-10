@@ -8,10 +8,10 @@ OBJ = main.o ft_printf.o ft_putunbr_base.o ft_putaddress.o \
 all: $(Name)
 
 $(Name): $(OBJ)
-	$(CC) -l mlx -L . -framework OpenGL -framework Appkit $(OBJ) -o $(Name)
+	$(CC) -g -l mlx -L . -framework OpenGL -framework Appkit $(OBJ) -o $(Name)
 
 %.o: %.c so_long.h ft_printf.h get_next_line.h
-	$(CC)  -Wall  -Wextra -Werror -Imlx -c $< -o $@
+	$(CC) -g  -Wall  -Wextra -Werror -Imlx -c $< -o $@
 
 clean: 
 	rm -f $(OBJ);

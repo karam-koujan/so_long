@@ -6,7 +6,7 @@
 /*   By: kkoujan <kkoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 11:04:25 by kkoujan           #+#    #+#             */
-/*   Updated: 2025/01/09 12:57:43 by kkoujan          ###   ########.fr       */
+/*   Updated: 2025/01/10 12:41:44 by kkoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,17 @@ int	check_path(char *path)
 
 	path_arr = ft_split(path, '.');
 	if (arr_len(path_arr) < 2)
+	{
+		free_arr(path_arr, arr_len(path_arr));
 		return (0);
+	}
 	format = path_arr[arr_len(path_arr) - 1];
 	if (ft_strncmp(format, "ber", 3) != 0)
+	{
+		free_arr(path_arr, arr_len(path_arr));
 		return (0);
-	free_arr(path_arr, arr_len(path_arr) - 1);
+	}
+	free_arr(path_arr, arr_len(path_arr));
 	return (1);
 }
 
@@ -65,4 +71,15 @@ char	*absolute_path(char *path)
 	ft_strlen(path_arr[len - 1]));
 	free_arr(path_arr, len - 1);
 	return (res_path);
+}
+
+void	clean_up(t_vars *vars)
+{
+	free_arr(vars->map, count_rows(vars->map));
+	free(vars->abs);
+	mlx_destroy_image(vars->libx.mlx, vars->player->player_component);
+	free(vars->player->x);
+	mlx_destroy_image(vars->libx.mlx, vars->player->player_c_flip);
+	mlx_clear_window(vars->libx.mlx, vars->libx.win);
+	free(vars->player);
 }

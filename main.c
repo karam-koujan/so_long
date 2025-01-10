@@ -6,7 +6,7 @@
 /*   By: kkoujan <kkoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 16:46:50 by kkoujan           #+#    #+#             */
-/*   Updated: 2025/01/09 14:15:38 by kkoujan          ###   ########.fr       */
+/*   Updated: 2025/01/10 12:40:03 by kkoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	key_hook(int keycode, t_vars *vars)
 {
 	if (keycode == 53)
 	{
+		clean_up(vars);
 		exit(0);
 		return (0);
 	}
@@ -38,8 +39,9 @@ int	key_hook(int keycode, t_vars *vars)
 	return (0);
 }
 
-int	close_window(void)
+int	close_window(t_vars *vars)
 {
+	clean_up(vars);
 	exit(0);
 	return (0);
 }
@@ -83,6 +85,7 @@ int	main(int ac, char **av)
 	if (ac != 2)
 		return (1);
 	mlx.mlx = mlx_init();
+	vars.libx.mlx = mlx.mlx;
 	if (!mlx.mlx)
 		return (1);
 	map = map_create(av[1]);
@@ -98,5 +101,5 @@ int	main(int ac, char **av)
 	vars.player = player(map, &vars);
 	movement_count(vars.player->steps_count, &vars);
 	hooks(&vars);
-	return (mlx_loop(mlx.mlx), free(vars.player), free(mlx.mlx), 0);
+	return (mlx_loop(mlx.mlx), 0);
 }
