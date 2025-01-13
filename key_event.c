@@ -6,7 +6,7 @@
 /*   By: kkoujan <kkoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 09:25:49 by kkoujan           #+#    #+#             */
-/*   Updated: 2025/01/13 09:51:00 by kkoujan          ###   ########.fr       */
+/*   Updated: 2025/01/13 10:14:15 by kkoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void	move_left(char **map, void *bg, t_player *player, t_vars *vars)
 		component_render_pos(vars->libx, map, bg, vars->map_metadata);
 		player->coins--;
 	}
-	player->coins++;
 	component_render_pos(vars->libx, map, player->player_c_flip, \
 	vars->map_metadata);
 	vars->map_metadata.x++;
@@ -62,7 +61,6 @@ void	move_right(char **map, void *bg, t_player *player, t_vars *vars)
 		component_render_pos(vars->libx, map, bg, vars->map_metadata);
 		player->coins--;
 	}
-	player->coins++;
 	component_render_pos(vars->libx, map, player->player_component, \
 	vars->map_metadata);
 	vars->map_metadata.x--;
@@ -91,7 +89,6 @@ void	move_up(char **map, void *bg, t_player *player, t_vars *vars)
 		component_render_pos(vars->libx, map, bg, vars->map_metadata);
 		player->coins--;
 	}
-	player->coins++;
 	component_render_pos(vars->libx, map, player->player_component, \
 	vars->map_metadata);
 	vars->map_metadata.y++;
@@ -120,7 +117,6 @@ void	move_down(char **map, void *bg, t_player *player, t_vars *vars)
 		component_render_pos(vars->libx, map, bg, vars->map_metadata);
 		player->coins--;
 	}
-	player->coins++;
 	component_render_pos(vars->libx, map, player->player_component, \
 	vars->map_metadata);
 	vars->map_metadata.y--;
