@@ -6,7 +6,7 @@
 /*   By: kkoujan <kkoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 11:04:25 by kkoujan           #+#    #+#             */
-/*   Updated: 2025/01/10 12:41:44 by kkoujan          ###   ########.fr       */
+/*   Updated: 2025/01/13 09:25:38 by kkoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ void	clean_up(t_vars *vars)
 	free(vars->abs);
 	mlx_destroy_image(vars->libx.mlx, vars->player->player_component);
 	free(vars->player->x);
+	free(vars->player->y);
 	mlx_destroy_image(vars->libx.mlx, vars->player->player_c_flip);
 	mlx_clear_window(vars->libx.mlx, vars->libx.win);
 	free(vars->player);

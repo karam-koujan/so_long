@@ -6,7 +6,7 @@
 /*   By: kkoujan <kkoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 16:46:50 by kkoujan           #+#    #+#             */
-/*   Updated: 2025/01/10 12:40:03 by kkoujan          ###   ########.fr       */
+/*   Updated: 2025/01/13 09:44:49 by kkoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,24 +18,13 @@ int	key_hook(int keycode, t_vars *vars)
 	{
 		clean_up(vars);
 		exit(0);
-		return (0);
 	}
 	vars->map_metadata.height = 60;
 	vars->map_metadata.width = 60;
 	if (keycode == 13 || keycode == 0)
-	{
-		vars->player->steps_count++;
-		ft_printf("%i\n", vars->player->steps_count);
-		movement_count(vars->player->steps_count, vars);
 		player_v_move(vars->map, vars->player, keycode, vars);
-	}
 	if (keycode == 1 || keycode == 2)
-	{
-		vars->player->steps_count++;
-		ft_printf("%i\n", vars->player->steps_count);
-		movement_count(vars->player->steps_count, vars);
 		player_h_move(vars->map, vars->player, keycode, vars);
-	}
 	return (0);
 }
 
