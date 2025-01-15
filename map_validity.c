@@ -6,7 +6,7 @@
 /*   By: kkoujan <kkoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 20:20:28 by kkoujan           #+#    #+#             */
-/*   Updated: 2025/01/06 11:02:44 by kkoujan          ###   ########.fr       */
+/*   Updated: 2025/01/10 12:08:46 by kkoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,10 +114,9 @@ int	is_path_valid(char **map)
 	map_copy = copy_map(map);
 	if (!map_copy)
 		return (0);
-	res = dfs(map, corr[0], \
+	res = dfs(map_copy, corr[0], \
 				corr[1], rows - 1);
 	free_arr(map_copy, rows - 1);
 	free(corr);
 	return (res >= collectible + 1);
 }
-

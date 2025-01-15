@@ -6,27 +6,21 @@
 /*   By: kkoujan <kkoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 12:43:15 by kkoujan           #+#    #+#             */
-/*   Updated: 2025/01/07 09:18:47 by kkoujan          ###   ########.fr       */
+/*   Updated: 2025/01/14 09:53:11 by kkoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-t_player	*player(char	**map, t_vars *vars)
+t_player	*player_init(char **map)
 {
 	t_player	*player;
-	void		*component;
 	int			*corr;
 
-	component = mlx_xpm_file_to_image(vars->libx.mlx, "./textures/character.xpm", \
-	&vars->map_metadata.width, &vars->map_metadata.height);
 	player = (t_player *)malloc(sizeof(t_player));
 	if (!player)
 		return (NULL);
 	corr = get_component_corr(map, 'P');
-	player->player_component = component;
-	player->player_c_flip = mlx_xpm_file_to_image(vars->libx.mlx, "./textures/characterflip.xpm", \
-	&vars->map_metadata.width, &vars->map_metadata.height);
 	player->x = corr;
 	player->y = corr + 1;
 	player->steps_count = 0;
@@ -34,144 +28,69 @@ t_player	*player(char	**map, t_vars *vars)
 	return (player);
 }
 
+t_player	*player(char	**map, t_vars *vars)
+{
+	t_player	*player;
+	char		*abs;
+	char		*p_path;
+
+	abs = vars->abs;
+	player = player_init(map);
+	p_path = ft_strjoin(abs, "textures/character.xpm");
+	player->player_component = mlx_xpm_file_to_image(vars->libx.mlx, p_path, \
+	&vars->map_metadata.width, &vars->map_metadata.height);
+	if (!player->player_component)
+		exit(1);
+	free(p_path);
+	p_path = ft_strjoin(vars->abs, "textures/characterflip.xpm");
+	player->player_c_flip = mlx_xpm_file_to_image(vars->libx.mlx, p_path, \
+	&vars->map_metadata.width, &vars->map_metadata.height);
+	if (!player->player_c_flip)
+		exit(1);
+	free(p_path);
+	return (player);
+}
+
 void	player_v_move(char	**map, t_player *player, int keycode, t_vars *vars)
 {
 	void	*bg;
+	char	*abs;
+	char	*path;
 
 	vars->map_metadata.x = *player->x;
 	vars->map_metadata.y = *player->y;
-	bg = mlx_xpm_file_to_image(vars->libx.mlx, "./textures/road.xpm", \
+	abs = vars->abs;
+	path = ft_strjoin(abs, "textures/road.xpm");
+	bg = mlx_xpm_file_to_image(vars->libx.mlx, path, \
 	&vars->map_metadata.width, &vars->map_metadata.height);
+	if (!bg)
+		exit(1);
 	if (keycode == 13)
-	{
-		if (map[vars->map_metadata.y - 1][vars->map_metadata.x] == 'N')
-		{
-			exit(0);
-			return ;
-		}
-		if (map[vars->map_metadata.y - 1][vars->map_metadata.x] == 'E')
-		{
-			if (player->coins)
-				return ;
-			exit(0);
-			return ;
-		}
-		if (map[vars->map_metadata.y - 1][vars->map_metadata.x] == '1')
-			return ;
-		vars->map_metadata.y--;
-		(*player->y)--;
-		if (map[vars->map_metadata.y][vars->map_metadata.x] == 'C')
-		{
-			map[vars->map_metadata.y][vars->map_metadata.x] = '0';
-			component_render_pos(vars->libx, map, bg, vars->map_metadata);
-			player->coins--;	
-		}
-		component_render_pos(vars->libx, map, player->player_component, \
-		vars->map_metadata);
-		vars->map_metadata.y++;
-		component_render_pos(vars->libx, map, bg, vars->map_metadata);
-		vars->map_metadata.y--;
-	}
-	if (keycode == 0)
-	{
-		if (map[vars->map_metadata.y + 1][vars->map_metadata.x] == 'N')
-		{
-			exit(0);
-			return ;
-		}
-		if (map[vars->map_metadata.y + 1][vars->map_metadata.x] == 'E')
-		{
-			if (player->coins)
-				return ;
-			exit(0);
-			return ;
-		}
-		if (map[vars->map_metadata.y + 1][vars->map_metadata.x] == '1')
-			return ;
-		vars->map_metadata.y++;
-		(*player->y)++;
-		if (map[vars->map_metadata.y][vars->map_metadata.x] == 'C')
-		{
-			map[vars->map_metadata.y][vars->map_metadata.x] = '0';
-			component_render_pos(vars->libx, map, bg, vars->map_metadata);
-			player->coins--;	
-		}
-		component_render_pos(vars->libx, map, player->player_component, \
-		vars->map_metadata);
-		vars->map_metadata.y--;
-		component_render_pos(vars->libx, map, bg, vars->map_metadata);
-		vars->map_metadata.y++;
-	}
+		move_up(map, bg, player, vars);
+	if (keycode == 1)
+		move_down(map, bg, player, vars);
+	free(path);
 	mlx_destroy_image(vars->libx.mlx, bg);
 }
 
 void	player_h_move(char	**map, t_player *player, int keycode, t_vars *vars)
 {
 	void	*bg;
+	char	*abs;
+	char	*path;
 
 	vars->map_metadata.x = *player->x;
 	vars->map_metadata.y = *player->y;
-	bg = mlx_xpm_file_to_image(vars->libx.mlx, "./textures/road.xpm", \
+	abs = vars->abs;
+	path = ft_strjoin(abs, "textures/road.xpm");
+	bg = mlx_xpm_file_to_image(vars->libx.mlx, path, \
 	&vars->map_metadata.width, &vars->map_metadata.height);
-	if (keycode == 1)
-	{
-		if (map[vars->map_metadata.y][vars->map_metadata.x - 1] == 'N')
-		{
-			exit(0);
-			return ;
-		}
-		if (map[vars->map_metadata.y][vars->map_metadata.x - 1] == 'E')
-		{
-			if (player->coins)
-				return ;
-			exit(0);
-			return ;
-		}
-		if (map[vars->map_metadata.y][vars->map_metadata.x - 1] == '1')
-			return ;
-		vars->map_metadata.x--;
-		(*player->x)--;
-		if (map[vars->map_metadata.y][vars->map_metadata.x] == 'C')
-		{
-			map[vars->map_metadata.y][vars->map_metadata.x] = '0';
-			component_render_pos(vars->libx, map, bg, vars->map_metadata);
-			player->coins--;	
-		}
-		component_render_pos(vars->libx, map, player->player_c_flip, \
-		vars->map_metadata);
-		vars->map_metadata.x++;
-		component_render_pos(vars->libx, map, bg, vars->map_metadata);
-		vars->map_metadata.x--;
-	}
+	if (!bg)
+		exit(1);
+	if (keycode == 0)
+		move_left(map, bg, player, vars);
 	if (keycode == 2)
-	{
-		if (map[vars->map_metadata.y][vars->map_metadata.x + 1] == 'N')
-		{
-			exit(0);
-			return ;
-		}
-		if (map[vars->map_metadata.y][vars->map_metadata.x + 1] == 'E')
-		{
-			if (player->coins)
-				return ;
-			exit(0);
-			return ;
-		}
-		if (map[vars->map_metadata.y][vars->map_metadata.x + 1] == '1')
-			return ;
-		vars->map_metadata.x++;
-		(*player->x)++;
-		if (map[vars->map_metadata.y][vars->map_metadata.x] == 'C')
-		{
-			map[vars->map_metadata.y][vars->map_metadata.x] = '0';
-			component_render_pos(vars->libx, map, bg, vars->map_metadata);
-			player->coins--;	
-		}
-		component_render_pos(vars->libx, map, player->player_component, \
-		vars->map_metadata);
-		vars->map_metadata.x--;
-		component_render_pos(vars->libx, map, bg, vars->map_metadata);
-		vars->map_metadata.x++;
-	}
+		move_right(map, bg, player, vars);
+	free(path);
 	mlx_destroy_image(vars->libx.mlx, bg);
 }

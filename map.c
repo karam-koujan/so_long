@@ -6,7 +6,7 @@
 /*   By: kkoujan <kkoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 15:34:54 by kkoujan           #+#    #+#             */
-/*   Updated: 2025/01/05 14:02:12 by kkoujan          ###   ########.fr       */
+/*   Updated: 2025/01/10 12:39:23 by kkoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,15 @@ int	calculate_rows(char	*file_path)
 
 int	check_map(char **map)
 {
-	return (is_rectangular(map) && check_walls(map) && check_elements(map) \
-				&& is_path_valid(map));
+	int	is_valid;
+
+	is_valid = is_rectangular(map) && check_walls(map) && check_elements(map) \
+				&& is_path_valid(map);
+	if (!is_valid)
+	{
+		free_arr(map, count_rows(map));
+	}
+	return (is_valid);
 }
 
 char	**read_map(int fd, char *file_path)
@@ -65,7 +72,7 @@ char	**read_map(int fd, char *file_path)
 	row_line = get_next_line(fd);
 	while (row_line)
 	{
-		map[i] = (char *)malloc(calculate_cols(row_line) * sizeof(char));
+		map[i] = (char *)malloc((calculate_cols(row_line) + 1) * sizeof(char));
 		if (!map)
 		{
 			free_arr(map, i - 1);
