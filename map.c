@@ -6,7 +6,7 @@
 /*   By: kkoujan <kkoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 15:34:54 by kkoujan           #+#    #+#             */
-/*   Updated: 2025/01/17 10:08:54 by kkoujan          ###   ########.fr       */
+/*   Updated: 2025/01/17 10:42:27 by kkoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,14 @@ int	calculate_rows(char	*file_path)
 	int		rows;
 	int		fd;
 	int		nl;
-	
+
 	nl = 0;
 	fd = open(file_path, O_RDONLY, 0777);
 	row_line = get_next_line(fd);
 	rows = 0;
 	while (row_line)
 	{
-		if (ft_strchr(row_line,'\n'))
+		if (ft_strchr(row_line, '\n'))
 			nl++;
 		free(row_line);
 		rows++;

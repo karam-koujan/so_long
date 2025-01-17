@@ -6,7 +6,7 @@
 /*   By: kkoujan <kkoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 11:06:50 by kkoujan           #+#    #+#             */
-/*   Updated: 2025/01/14 09:56:38 by kkoujan          ###   ########.fr       */
+/*   Updated: 2025/01/17 10:34:30 by kkoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,10 @@ void	component_create(char **map, t_data mlx, char elm, char *file_path)
 	component = mlx_xpm_file_to_image(mlx.mlx, file_path, \
 									&map_metadata.width, &map_metadata.height);
 	if (!component)
-		exit(1);
+	{
+		ft_printf("Error\na file not found\n");
+		exit(1);		
+	}
 	component_render(map, mlx, component, map_metadata);
 	free(file_path);
 }
@@ -107,7 +110,10 @@ void	movement_count(int count, t_vars *vars)
 		img = mlx_xpm_file_to_image(vars->libx.mlx, numbers[num[i] - '0'], \
 		&size, &size);
 		if (!img)
+		{
+			ft_printf("Error\na file not found\n");
 			exit(1);
+		}
 		mlx_put_image_to_window(vars->libx.mlx, vars->libx.win, img, i * \
 					size, 0 * size);
 		i++;

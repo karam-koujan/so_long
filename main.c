@@ -6,7 +6,7 @@
 /*   By: kkoujan <kkoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 16:46:50 by kkoujan           #+#    #+#             */
-/*   Updated: 2025/01/17 10:14:44 by kkoujan          ###   ########.fr       */
+/*   Updated: 2025/01/17 10:31:22 by kkoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,13 +72,13 @@ int	main(int ac, char **av)
 	t_vars	vars;
 
 	if (ac != 2)
-		return (1);
+		return (ft_printf("Error\ninvalid path\n"), 1);
 	mlx.mlx = mlx_init();
 	vars.libx.mlx = mlx.mlx;
 	if (!mlx.mlx)
 		return (1);
 	map = map_create(av[1]);
-	if (!check_map(map) && ft_printf("Error\nThe map you gave is invalid\n"))
+	if (!check_map(map) && ft_printf("Error\ninvalid map\n"))
 		exit(1);
 	mlx.height = 60 * count_rows(map);
 	mlx.width = 60 * ft_strlen(map[0]);

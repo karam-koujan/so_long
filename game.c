@@ -6,7 +6,7 @@
 /*   By: kkoujan <kkoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 12:43:15 by kkoujan           #+#    #+#             */
-/*   Updated: 2025/01/14 09:53:11 by kkoujan          ###   ########.fr       */
+/*   Updated: 2025/01/17 10:37:25 by kkoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,19 @@ t_player	*player(char	**map, t_vars *vars)
 	player->player_component = mlx_xpm_file_to_image(vars->libx.mlx, p_path, \
 	&vars->map_metadata.width, &vars->map_metadata.height);
 	if (!player->player_component)
+	{
+		ft_printf("Error\na file not found\n");
 		exit(1);
+	}
 	free(p_path);
 	p_path = ft_strjoin(vars->abs, "textures/characterflip.xpm");
 	player->player_c_flip = mlx_xpm_file_to_image(vars->libx.mlx, p_path, \
 	&vars->map_metadata.width, &vars->map_metadata.height);
 	if (!player->player_c_flip)
+	{
+		ft_printf("Error\na file not found\n");
 		exit(1);
+	}
 	free(p_path);
 	return (player);
 }
@@ -64,7 +70,10 @@ void	player_v_move(char	**map, t_player *player, int keycode, t_vars *vars)
 	bg = mlx_xpm_file_to_image(vars->libx.mlx, path, \
 	&vars->map_metadata.width, &vars->map_metadata.height);
 	if (!bg)
+	{
+		ft_printf("Error\na file not found\n");
 		exit(1);
+	}
 	if (keycode == 13)
 		move_up(map, bg, player, vars);
 	if (keycode == 1)
@@ -86,7 +95,10 @@ void	player_h_move(char	**map, t_player *player, int keycode, t_vars *vars)
 	bg = mlx_xpm_file_to_image(vars->libx.mlx, path, \
 	&vars->map_metadata.width, &vars->map_metadata.height);
 	if (!bg)
+	{
+		ft_printf("Error\na file not found\n");
 		exit(1);
+	}
 	if (keycode == 0)
 		move_left(map, bg, player, vars);
 	if (keycode == 2)
