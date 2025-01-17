@@ -6,7 +6,7 @@
 /*   By: kkoujan <kkoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 16:46:50 by kkoujan           #+#    #+#             */
-/*   Updated: 2025/01/17 11:21:27 by kkoujan          ###   ########.fr       */
+/*   Updated: 2025/01/17 13:40:45 by kkoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,17 +59,12 @@ void	hooks(t_vars *vars)
 	mlx_hook(vars->libx.win, 17, 0, close_window, vars);
 }
 
-void	f()
-{
-	system("leaks so_long");
-}
-
 int	main(int ac, char **av)
 {
 	char	**map;
 	t_data	mlx;
 	t_vars	vars;
-	atexit(f);
+
 	if (ac != 2)
 		return (ft_printf("Error\ninvalid path\n"), 1);
 	mlx.mlx = mlx_init();

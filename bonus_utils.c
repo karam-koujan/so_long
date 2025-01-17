@@ -6,7 +6,7 @@
 /*   By: kkoujan <kkoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 11:04:25 by kkoujan           #+#    #+#             */
-/*   Updated: 2025/01/17 11:43:47 by kkoujan          ###   ########.fr       */
+/*   Updated: 2025/01/17 13:41:37 by kkoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,3 @@ char	*absolute_path(char *path)
 	free_arr(path_arr, len - 1);
 	return (res_path);
 }
-
-

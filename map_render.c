@@ -6,7 +6,7 @@
 /*   By: kkoujan <kkoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 11:06:50 by kkoujan           #+#    #+#             */
-/*   Updated: 2025/01/17 11:55:34 by kkoujan          ###   ########.fr       */
+/*   Updated: 2025/01/17 13:21:51 by kkoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ t_map map_metadata)
 		mlx_put_image_to_window(mlx.mlx, mlx.win, img, map_metadata.x * \
 					60, map_metadata.y * 60);
 	}
-	mlx_destroy_image(mlx.mlx, img);
 }
 
 void	component_create(char **map, t_vars *vars, char elm, char *file_path)
@@ -120,5 +119,5 @@ void	movement_count(int count, t_vars *vars)
 		i++;
 		mlx_destroy_image(vars->libx.mlx, img);
 	}
-	clean_movement(vars, num, numbers);
+	clean_movement(NULL, num, numbers);
 }

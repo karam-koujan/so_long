@@ -6,7 +6,7 @@
 /*   By: kkoujan <kkoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 12:43:15 by kkoujan           #+#    #+#             */
-/*   Updated: 2025/01/17 11:50:56 by kkoujan          ###   ########.fr       */
+/*   Updated: 2025/01/17 13:37:10 by kkoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,5 +104,4 @@ void	player_h_move(char	**map, t_player *player, int keycode, t_vars *vars)
 	if (keycode == 2)
 		move_right(map, bg, player, vars);
 	free(path);
-	mlx_destroy_image(vars->libx.mlx, bg);
 }
