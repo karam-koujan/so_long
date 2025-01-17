@@ -24,10 +24,10 @@ bonus: $(BONUS_NAME)
 $(BONUS_NAME): $(BONUS)
 	$(CC) -g -l mlx -L . -framework OpenGL -framework Appkit $(BONUS) -o $(BONUS_NAME)
 
-%.o: %.c ./bonus/so_long_bonus.h ./bonus/ft_printf_bonus.h ./bonus/get_next_line_bonus.h
+./bonus/%.o: ./bonus/%.c ./bonus/so_long_bonus.h ./bonus/ft_printf_bonus.h ./bonus/get_next_line_bonus.h
 	$(CC) -g -Wall  -Wextra -Werror -Imlx -c $< -o $@
 
-%.o: %.c /mandatory/so_long.h ./mandatory/ft_printf.h ./mandatory/get_next_line.h
+./mandatory/%.o: ./mandatory/%.c ./mandatory/so_long.h ./mandatory/ft_printf.h ./mandatory/get_next_line.h
 	$(CC) -g -Wall  -Wextra -Werror -Imlx -c $< -o $@
 
 clean: 
