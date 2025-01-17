@@ -6,7 +6,7 @@
 /*   By: kkoujan <kkoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 11:04:25 by kkoujan           #+#    #+#             */
-/*   Updated: 2025/01/14 09:38:14 by kkoujan          ###   ########.fr       */
+/*   Updated: 2025/01/17 11:20:10 by kkoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,20 +66,30 @@ char	*absolute_path(char *path)
 	int		len;
 
 	path_arr = ft_split(path, '/');
+	if (!path_arr)
+		return (ft_printf("Error\nallocation failed\n"), exit(1), NULL);
 	len = arr_len(path_arr);
 	res_path = ft_substr(path, 0, ft_strlen(path) - \
 	ft_strlen(path_arr[len - 1]));
+	if (!res_path)
+		return (ft_printf("Error\nallocation failed\n"), exit(1), NULL);
 	free_arr(path_arr, len - 1);
 	return (res_path);
 }
 
 void	clean_up(t_vars *vars)
 {
-	free_arr(vars->map, count_rows(vars->map));
-	free(vars->abs);
+	if (vars->map)
+		free_arr(vars->map, count_rows(vars->map));
+	if (vars->abs)
+		free(vars->abs);
 	mlx_destroy_image(vars->libx.mlx, vars->player->player_component);
-	free(vars->player->x);
-	mlx_destroy_image(vars->libx.mlx, vars->player->player_c_flip);
-	mlx_clear_window(vars->libx.mlx, vars->libx.win);
+	if (vars->player && vars->player->x)
+		free(vars->player->x);
+	if (vars->player && vars->player->player_component)
+		mlx_destroy_image(vars->libx.mlx, vars->player->player_component);
+	if (vars->player && vars->player->player_c_flip)
+		mlx_destroy_image(vars->libx.mlx, vars->player->player_c_flip);
 	free(vars->player);
+	mlx_clear_window(vars->libx.mlx, vars->libx.win);
 }

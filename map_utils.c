@@ -6,7 +6,7 @@
 /*   By: kkoujan <kkoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 12:15:33 by kkoujan           #+#    #+#             */
-/*   Updated: 2025/01/08 11:03:43 by kkoujan          ###   ########.fr       */
+/*   Updated: 2025/01/17 11:03:15 by kkoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ char	**copy_map(char **map)
 	while (i < rows)
 	{
 		new_map[i] = ft_strdup(map[i]);
+		if (!new_map[i])
+			return (free_arr(new_map, i), NULL);
 		i++;
 	}
 	new_map[i] = NULL;

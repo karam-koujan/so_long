@@ -6,7 +6,7 @@
 /*   By: kkoujan <kkoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 16:46:50 by kkoujan           #+#    #+#             */
-/*   Updated: 2025/01/17 10:31:22 by kkoujan          ###   ########.fr       */
+/*   Updated: 2025/01/17 11:21:27 by kkoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,20 +42,14 @@ char	**map_create(char *file_path)
 	int		is_path_valid;
 
 	fd = open(file_path, O_RDONLY, 0777);
+	if (fd < 0)
+		return (ft_printf("Error\nopen syscall failed\n"), exit(1), NULL);
 	is_path_valid = check_path(file_path);
-	if (!is_path_valid || fd < 0)
-	{
-		ft_printf("Error\ninvalid path\n");
-		exit(1);
-		return (NULL);
-	}
+	if (!is_path_valid)
+		return (ft_printf("Error\ninvalid path\n"), exit(1), NULL);
 	map = read_map(fd, file_path);
 	if (!map)
-	{
-		ft_printf("Error\ninvalid path\n");
-		exit(1);
-		return (NULL);
-	}
+		return (ft_printf("Error\nallocation failed\n"), exit(1), NULL);
 	return (map);
 }
 
@@ -65,12 +59,17 @@ void	hooks(t_vars *vars)
 	mlx_hook(vars->libx.win, 17, 0, close_window, vars);
 }
 
+void	f()
+{
+	system("leaks so_long");
+}
+
 int	main(int ac, char **av)
 {
 	char	**map;
 	t_data	mlx;
 	t_vars	vars;
-
+	atexit(f);
 	if (ac != 2)
 		return (ft_printf("Error\ninvalid path\n"), 1);
 	mlx.mlx = mlx_init();
@@ -86,6 +85,7 @@ int	main(int ac, char **av)
 	vars.libx = mlx;
 	vars.map = map;
 	vars.abs = absolute_path(av[0]);
+	vars.player = NULL;
 	map_render(map, &vars);
 	vars.player = player(map, &vars);
 	movement_count(vars.player->steps_count, &vars);

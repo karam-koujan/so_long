@@ -6,7 +6,7 @@
 /*   By: kkoujan <kkoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 11:06:50 by kkoujan           #+#    #+#             */
-/*   Updated: 2025/01/17 10:34:30 by kkoujan          ###   ########.fr       */
+/*   Updated: 2025/01/17 11:28:28 by kkoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ t_map map_metadata)
 	}
 }
 
-void	component_create(char **map, t_data mlx, char elm, char *file_path)
+void	component_create(char **map, t_vars *vars, char elm, char *file_path)
 {
 	void	*component;
 	t_map	map_metadata;
@@ -58,14 +58,16 @@ void	component_create(char **map, t_data mlx, char elm, char *file_path)
 	map_metadata.height = 60;
 	map_metadata.component = elm;
 	map_metadata.abs = file_path;
-	component = mlx_xpm_file_to_image(mlx.mlx, file_path, \
+	component = mlx_xpm_file_to_image(vars->libx.mlx, file_path, \
 									&map_metadata.width, &map_metadata.height);
 	if (!component)
 	{
 		ft_printf("Error\na file not found\n");
-		exit(1);		
+		free(file_path);
+		clean_up(vars);
+		exit(1);
 	}
-	component_render(map, mlx, component, map_metadata);
+	component_render(map, vars->libx, component, map_metadata);
 	free(file_path);
 }
 
@@ -76,20 +78,21 @@ void	map_render(char **map, t_vars *vars)
 	abs = vars->abs;
 	if (vars->libx.width > 5120 || vars->libx.height > 1440)
 	{
+		clean_up(vars);
 		ft_printf("Error\nmap is to long to fit the monitor\n");
 		exit(1);
 	}
-	component_create(map, vars->libx, '0', ft_strjoin(abs, \
+	component_create(map, vars, '0', ft_strjoin(abs, \
 	"textures/road.xpm"));
-	component_create(map, vars->libx, '1', ft_strjoin(abs, \
+	component_create(map, vars, '1', ft_strjoin(abs, \
 	"textures/wall.xpm"));
-	component_create(map, vars->libx, 'C', ft_strjoin(abs, \
+	component_create(map, vars, 'C', ft_strjoin(abs, \
 	"textures/coin.xpm"));
-	component_create(map, vars->libx, 'E', ft_strjoin(abs, \
+	component_create(map, vars, 'E', ft_strjoin(abs, \
 	"textures/exit.xpm"));
-	component_create(map, vars->libx, 'P', ft_strjoin(abs, \
+	component_create(map, vars, 'P', ft_strjoin(abs, \
 	"textures/character.xpm"));
-	component_create(map, vars->libx, 'N', ft_strjoin(abs, \
+	component_create(map, vars, 'N', ft_strjoin(abs, \
 	"textures/enemy.xpm"));
 }
 

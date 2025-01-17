@@ -6,7 +6,7 @@
 /*   By: kkoujan <kkoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 15:34:54 by kkoujan           #+#    #+#             */
-/*   Updated: 2025/01/17 10:42:27 by kkoujan          ###   ########.fr       */
+/*   Updated: 2025/01/17 10:58:00 by kkoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,8 @@ char	**read_map(int fd, char *file_path)
 		row_line = get_next_line(fd);
 		i++;
 	}
-	if (i != calculate_rows(file_path) && ft_printf("Error\ninvalid map\n"))
-		return (free(row_line), exit(1), NULL);
 	map[i] = NULL;
+	if (i != calculate_rows(file_path) && ft_printf("Error\ninvalid map\n"))
+		return (free(row_line), free_arr(map, i), exit(1), NULL);
 	return (free(row_line), map);
 }
