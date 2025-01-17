@@ -6,7 +6,7 @@
 /*   By: kkoujan <kkoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 12:43:15 by kkoujan           #+#    #+#             */
-/*   Updated: 2025/01/17 13:37:10 by kkoujan          ###   ########.fr       */
+/*   Updated: 2025/01/17 13:43:27 by kkoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,9 @@ void	player_h_move(char	**map, t_player *player, int keycode, t_vars *vars)
 	&vars->map_metadata.width, &vars->map_metadata.height);
 	if (!bg)
 	{
-		ft_printf("Error\na file not found\n");
+		ft_printf("Error\nfile not found\n");
+		free(path);
+		clean_up(vars);
 		exit(1);
 	}
 	if (keycode == 0)
@@ -104,4 +106,5 @@ void	player_h_move(char	**map, t_player *player, int keycode, t_vars *vars)
 	if (keycode == 2)
 		move_right(map, bg, player, vars);
 	free(path);
+	mlx_destroy_image(vars->libx.mlx, bg);
 }
