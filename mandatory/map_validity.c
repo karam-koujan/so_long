@@ -6,7 +6,7 @@
 /*   By: kkoujan <kkoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 20:20:28 by kkoujan           #+#    #+#             */
-/*   Updated: 2025/01/10 12:08:46 by kkoujan          ###   ########.fr       */
+/*   Updated: 2025/01/17 14:29:17 by kkoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	check_elements(char **map)
 	collectible = count_components(map, 'C');
 	s_pos = count_components(map, 'P');
 	map_size = exit + collectible + s_pos + count_components(map, '1') \
-				+ count_components(map, '0') + count_components(map, 'N');
+				+ count_components(map, '0');
 	return (1 && !(exit != 1 || collectible == 0 || s_pos != 1) \
 			&& count_rows(map) * (int)ft_strlen(map[0]) == map_size);
 }
@@ -84,7 +84,7 @@ int	dfs(char **map, int x, int y, int rows)
 	cols = ft_strlen(map[0]);
 	collectible = 0;
 	if (x < 0 || y < 0 || x >= cols || y >= rows \
-		|| map[y][x] == '1' || map[y][x] == 'V' || map[y][x] == 'N')
+		|| map[y][x] == '1' || map[y][x] == 'V')
 	{
 		return (0);
 	}

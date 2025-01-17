@@ -6,7 +6,7 @@
 /*   By: kkoujan <kkoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 11:06:50 by kkoujan           #+#    #+#             */
-/*   Updated: 2025/01/17 13:21:51 by kkoujan          ###   ########.fr       */
+/*   Updated: 2025/01/17 15:18:11 by kkoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,32 +92,4 @@ void	map_render(char **map, t_vars *vars)
 	"textures/exit.xpm"));
 	component_create(map, vars, 'P', ft_strjoin(abs, \
 	"textures/character.xpm"));
-	component_create(map, vars, 'N', ft_strjoin(abs, \
-	"textures/enemy.xpm"));
-}
-
-void	movement_count(int count, t_vars *vars)
-{
-	char		*numbers[10];
-	void		*img;
-	int			size;
-	char		*num;
-	int			i;
-
-	size = 60;
-	i = 0;
-	init_numbers(numbers, vars);
-	num = ft_itoa(count);
-	while (num[i])
-	{
-		img = mlx_xpm_file_to_image(vars->libx.mlx, numbers[num[i] - '0'], \
-		&size, &size);
-		if (!img && ft_printf("Error\nfile not found\n"))
-			return (clean_movement(vars, num, numbers), exit(1));
-		mlx_put_image_to_window(vars->libx.mlx, vars->libx.win, img, i * \
-					size, 0 * size);
-		i++;
-		mlx_destroy_image(vars->libx.mlx, img);
-	}
-	clean_movement(NULL, num, numbers);
 }

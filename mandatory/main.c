@@ -6,7 +6,7 @@
 /*   By: kkoujan <kkoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 16:46:50 by kkoujan           #+#    #+#             */
-/*   Updated: 2025/01/17 13:40:45 by kkoujan          ###   ########.fr       */
+/*   Updated: 2025/01/17 14:31:54 by kkoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ int	main(int ac, char **av)
 	vars.player = NULL;
 	map_render(map, &vars);
 	vars.player = player(map, &vars);
-	movement_count(vars.player->steps_count, &vars);
 	hooks(&vars);
 	return (mlx_loop(mlx.mlx), 0);
 }
