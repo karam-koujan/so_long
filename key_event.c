@@ -6,7 +6,7 @@
 /*   By: kkoujan <kkoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 09:25:49 by kkoujan           #+#    #+#             */
-/*   Updated: 2025/01/13 10:14:15 by kkoujan          ###   ########.fr       */
+/*   Updated: 2025/01/17 11:56:36 by kkoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 void	move_left(char **map, void *bg, t_player *player, t_vars *vars)
 {
 	if (map[vars->map_metadata.y][vars->map_metadata.x - 1] == 'N')
-		exit(0);
+		return (clean_up(vars), mlx_destroy_image(vars->libx.mlx, bg), exit(0));
 	if (map[vars->map_metadata.y][vars->map_metadata.x - 1] == 'E')
 	{
 		if (player->coins)
 			return ;
-		exit(0);
+		return (clean_up(vars), mlx_destroy_image(vars->libx.mlx, bg), exit(0));
 	}
 	if (map[vars->map_metadata.y][vars->map_metadata.x - 1] == '1')
 		return ;
@@ -43,12 +43,12 @@ void	move_left(char **map, void *bg, t_player *player, t_vars *vars)
 void	move_right(char **map, void *bg, t_player *player, t_vars *vars)
 {
 	if (map[vars->map_metadata.y][vars->map_metadata.x + 1] == 'N')
-		exit(0);
+		return (clean_up(vars), mlx_destroy_image(vars->libx.mlx, bg), exit(0));
 	if (map[vars->map_metadata.y][vars->map_metadata.x + 1] == 'E')
 	{
 		if (player->coins)
 			return ;
-		exit(0);
+		return (clean_up(vars), mlx_destroy_image(vars->libx.mlx, bg), exit(0));
 	}
 	if (map[vars->map_metadata.y][vars->map_metadata.x + 1] == '1')
 		return ;
@@ -71,12 +71,12 @@ void	move_right(char **map, void *bg, t_player *player, t_vars *vars)
 void	move_up(char **map, void *bg, t_player *player, t_vars *vars)
 {
 	if (map[vars->map_metadata.y - 1][vars->map_metadata.x] == 'N')
-		exit(0);
+		return (clean_up(vars), mlx_destroy_image(vars->libx.mlx, bg), exit(0));
 	if (map[vars->map_metadata.y - 1][vars->map_metadata.x] == 'E')
 	{
 		if (player->coins)
 			return ;
-		exit(0);
+		return (clean_up(vars), mlx_destroy_image(vars->libx.mlx, bg), exit(0));
 	}
 	if (map[vars->map_metadata.y - 1][vars->map_metadata.x] == '1')
 		return ;
@@ -99,12 +99,12 @@ void	move_up(char **map, void *bg, t_player *player, t_vars *vars)
 void	move_down(char **map, void *bg, t_player *player, t_vars *vars)
 {
 	if (map[vars->map_metadata.y + 1][vars->map_metadata.x] == 'N')
-		exit(0);
+		return (clean_up(vars), mlx_destroy_image(vars->libx.mlx, bg), exit(0));
 	if (map[vars->map_metadata.y + 1][vars->map_metadata.x] == 'E')
 	{
 		if (player->coins)
 			return ;
-		exit(0);
+		return (clean_up(vars), mlx_destroy_image(vars->libx.mlx, bg), exit(0));
 	}
 	if (map[vars->map_metadata.y + 1][vars->map_metadata.x] == '1')
 		return ;

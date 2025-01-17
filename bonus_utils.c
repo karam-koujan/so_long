@@ -6,7 +6,7 @@
 /*   By: kkoujan <kkoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 11:04:25 by kkoujan           #+#    #+#             */
-/*   Updated: 2025/01/17 11:20:10 by kkoujan          ###   ########.fr       */
+/*   Updated: 2025/01/17 11:43:47 by kkoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,19 +77,4 @@ char	*absolute_path(char *path)
 	return (res_path);
 }
 
-void	clean_up(t_vars *vars)
-{
-	if (vars->map)
-		free_arr(vars->map, count_rows(vars->map));
-	if (vars->abs)
-		free(vars->abs);
-	mlx_destroy_image(vars->libx.mlx, vars->player->player_component);
-	if (vars->player && vars->player->x)
-		free(vars->player->x);
-	if (vars->player && vars->player->player_component)
-		mlx_destroy_image(vars->libx.mlx, vars->player->player_component);
-	if (vars->player && vars->player->player_c_flip)
-		mlx_destroy_image(vars->libx.mlx, vars->player->player_c_flip);
-	free(vars->player);
-	mlx_clear_window(vars->libx.mlx, vars->libx.win);
-}
+

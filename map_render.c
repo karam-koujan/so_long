@@ -6,7 +6,7 @@
 /*   By: kkoujan <kkoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 11:06:50 by kkoujan           #+#    #+#             */
-/*   Updated: 2025/01/17 11:28:28 by kkoujan          ###   ########.fr       */
+/*   Updated: 2025/01/17 11:55:34 by kkoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ t_map map_metadata)
 		mlx_put_image_to_window(mlx.mlx, mlx.win, img, map_metadata.x * \
 					60, map_metadata.y * 60);
 	}
+	mlx_destroy_image(mlx.mlx, img);
 }
 
 void	component_create(char **map, t_vars *vars, char elm, char *file_path)
@@ -112,18 +113,12 @@ void	movement_count(int count, t_vars *vars)
 	{
 		img = mlx_xpm_file_to_image(vars->libx.mlx, numbers[num[i] - '0'], \
 		&size, &size);
-		if (!img)
-		{
-			ft_printf("Error\na file not found\n");
-			exit(1);
-		}
+		if (!img && ft_printf("Error\nfile not found\n"))
+			return (clean_movement(vars, num, numbers), exit(1));
 		mlx_put_image_to_window(vars->libx.mlx, vars->libx.win, img, i * \
 					size, 0 * size);
 		i++;
 		mlx_destroy_image(vars->libx.mlx, img);
 	}
-	i = -1;
-	while (++i < 10)
-		free(numbers[i]);
-	free(num);
+	clean_movement(vars, num, numbers);
 }

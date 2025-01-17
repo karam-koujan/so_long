@@ -6,7 +6,7 @@
 /*   By: kkoujan <kkoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 15:55:26 by kkoujan           #+#    #+#             */
-/*   Updated: 2025/01/17 09:42:48 by kkoujan          ###   ########.fr       */
+/*   Updated: 2025/01/17 11:46:54 by kkoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,4 +96,5 @@ char		*absolute_path(char *path);
 char		*ft_strjoin(char const *s1, char const *s2);
 void		clean_up(t_vars *vars);
 void		count(t_player *player, t_vars *vars);
+void		clean_movement(t_vars *vars, char *num, char **numbers);
 #endif

@@ -6,7 +6,7 @@
 /*   By: kkoujan <kkoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 12:43:15 by kkoujan           #+#    #+#             */
-/*   Updated: 2025/01/17 11:36:16 by kkoujan          ###   ########.fr       */
+/*   Updated: 2025/01/17 11:50:56 by kkoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,9 @@ void	player_v_move(char	**map, t_player *player, int keycode, t_vars *vars)
 	&vars->map_metadata.width, &vars->map_metadata.height);
 	if (!bg)
 	{
-		ft_printf("Error\na file not found\n");
+		ft_printf("Error\nfile not found\n");
+		free(path);
+		clean_up(vars);
 		exit(1);
 	}
 	if (keycode == 13)
