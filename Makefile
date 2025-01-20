@@ -16,19 +16,19 @@ BONUS = ./bonus/main_bonus.o ./bonus/ft_printf_bonus.o ./bonus/ft_putunbr_base_b
 all: $(Name)
 
 $(Name): $(OBJ)
-	$(CC) -g -l mlx -L . -framework OpenGL -framework Appkit $(OBJ) -o $(Name)
+	$(CC)  -l mlx -L . -framework OpenGL -framework Appkit $(OBJ) -o $(Name)
 
 
 bonus: $(BONUS_NAME)
 
 $(BONUS_NAME): $(BONUS)
-	$(CC) -g -l mlx -L . -framework OpenGL -framework Appkit $(BONUS) -o $(BONUS_NAME)
+	$(CC) -l mlx -L . -framework OpenGL -framework Appkit $(BONUS) -o $(BONUS_NAME)
 
 ./bonus/%.o: ./bonus/%.c ./bonus/so_long_bonus.h ./bonus/ft_printf_bonus.h ./bonus/get_next_line_bonus.h
-	$(CC) -g -Wall  -Wextra -Werror -Imlx -c $< -o $@
+	$(CC)  -Wall  -Wextra -Werror -Imlx -c $< -o $@
 
 ./mandatory/%.o: ./mandatory/%.c ./mandatory/so_long.h ./mandatory/ft_printf.h ./mandatory/get_next_line.h
-	$(CC) -g -Wall  -Wextra -Werror -Imlx -c $< -o $@
+	$(CC)  -Wall  -Wextra -Werror -Imlx -c $< -o $@
 
 clean: 
 	rm -f $(OBJ) $(BONUS);

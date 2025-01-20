@@ -6,7 +6,7 @@
 /*   By: kkoujan <kkoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 11:43:54 by kkoujan           #+#    #+#             */
-/*   Updated: 2025/01/17 13:31:54 by kkoujan          ###   ########.fr       */
+/*   Updated: 2025/01/20 17:23:07 by kkoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,10 @@ void	clean_up(t_vars *vars)
 		mlx_destroy_image(vars->libx.mlx, vars->player->player_c_flip);
 	if (vars->player && vars->player->x)
 		free(vars->player->x);
-	free(vars->player);
-	mlx_clear_window(vars->libx.mlx, vars->libx.win);
+	if (vars->player)
+		free(vars->player);
+	if (vars->libx.win)
+		mlx_clear_window(vars->libx.mlx, vars->libx.win);
 }
 
 void	clean_movement(t_vars *vars, char *num, char **numbers)

@@ -6,7 +6,7 @@
 /*   By: kkoujan <kkoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 16:46:50 by kkoujan           #+#    #+#             */
-/*   Updated: 2025/01/17 14:43:20 by kkoujan          ###   ########.fr       */
+/*   Updated: 2025/01/20 17:34:49 by kkoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void	hooks(t_vars *vars)
 	mlx_hook(vars->libx.win, 17, 0, close_window, vars);
 }
 
+
 int	main(int ac, char **av)
 {
 	char	**map;
@@ -81,9 +82,9 @@ int	main(int ac, char **av)
 	vars.map = map;
 	vars.abs = absolute_path(av[0]);
 	vars.player = NULL;
+	if (!mlx.win)
+		return (clean_up(&vars), 1);
 	map_render(map, &vars);
 	vars.player = player(map, &vars);
-	movement_count(vars.player->steps_count, &vars);
-	hooks(&vars);
-	return (mlx_loop(mlx.mlx), 0);
+	return (hooks(&vars), mlx_loop(mlx.mlx), 0);
 }
